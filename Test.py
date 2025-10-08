@@ -27,9 +27,9 @@ def update_dynv6_a_via_api(ip, sub_name):
         all_records = response.json()
         
         record_data = {
-            "name": subdomain,
-            "type": "A",
-            "data": new_ip,
+            "nodeName": subdomain,
+            "recordType": "A",
+            "ipv4Address": new_ip,
             "ttl": ttl
         }
         
