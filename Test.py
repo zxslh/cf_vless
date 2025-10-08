@@ -35,7 +35,7 @@ def update_dynv6_a_via_api(ip, sub_name):
             "group": ""
         }
         
-        for record in all_records['dnsRcords']:
+        for record in all_records['dnsRecords']:
             if record["nodeName"] == subdomain and record["recordType"] == "A":
                 renew_response = requests.post(f"{base_url}/{record['id']}", headers=headers, data=json.dumps(record_data))
                 renew_response.raise_for_status()  # 捕获创建请求的错误     
