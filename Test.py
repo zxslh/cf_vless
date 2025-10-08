@@ -8,9 +8,9 @@ def update_dynv6_a_via_api(ip, sub_name):
     #api_token = 'xCsd_Hpo89auyq_kVF19QHGqLeQQ6b'
     #domain = 'cf-zxs.v6.rocks'
     
-    base_url = f"https://dynv6.com/api/v2/zones/5071717/records" #cf-zxs.dns.army
+    base_url = f"https://api.dynu.com/v2/dns/10251176/record"
     api_token = 'vTTXvP2dGw8dtHjwFRXXjVfWL1rcLU'
-    domain = 'cf-zxs.dns.army'
+    domain = 'zxs.ddnsfree.com'
     
     subdomain = str(sub_name)  # 确保子域名为字符串类型
     new_ip = ip
@@ -34,7 +34,7 @@ def update_dynv6_a_via_api(ip, sub_name):
         }
         
         for record in all_records:
-            if record["name"] == subdomain and record["type"] == "A":
+            if record["nodeName"] == subdomain and record["recordType"] == "A":
                 renew_response = requests.patch(f"{base_url}/{record['id']}", headers=headers, data=json.dumps(record_data))
                 renew_response.raise_for_status()  # 捕获创建请求的错误     
                 print(f"✅ 更新成功：{subdomain}.{domain} → {new_ip}")
