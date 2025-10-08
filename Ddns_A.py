@@ -74,7 +74,6 @@ def update_A_cfip():
     if unique_ips:
         for ip in unique_ips:
             update_dynv6_a_via_api(ip, i)
-            break
             i += 1
             if i > 40:
                 break
