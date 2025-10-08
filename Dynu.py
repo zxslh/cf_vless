@@ -3,20 +3,18 @@ import json
 import re
 import os
 
-def update_dynv6_a_via_api(ip, sub_name):
-    subdomain = str(sub_name)  # 确保子域名为字符串类型
-    new_ip = ip
+def update_dynv6_a_via_api(ip, sub_name, domain, id):
+
     ttl = 3600
     record_data = {
-        "nodeName": subdomain,
+        "nodeName": sub_name,
         "recordType": "A",
-        "ipv4Address": new_ip,
+        "ipv4Address": ip,
         "ttl": ttl,
         "state": True,
         "group": ""
     }
     api_token = 'bXV3VU6f2bagfYdVdYTU62U5Ud363366'
-    domain = 'as-zxs.ddnsfree.com'
     
     headers = {
         "accept": "application/json",
@@ -24,34 +22,34 @@ def update_dynv6_a_via_api(ip, sub_name):
     }
 
     try:
-        base_url = f'https://api.dynu.com/v2/dns/getroot/{domain}'
-        response = requests.get(base_url, headers=headers)
-        response.raise_for_status()
-        id = response.json()['id']
         base_url = f"https://api.dynu.com/v2/dns/{id}/record"
-        
         response = requests.get(base_url, headers=headers)
         response.raise_for_status()
         all_records = response.json()['dnsRecords']
         
         for record in all_records:
-            if record["nodeName"] == subdomain and record["recordType"] == "A":
+            if record["nodeName"] == str(sub_name) and record["recordType"] == "A":
                 base_url = f"{base_url}/{record['id']}"                
                 break
                 
         create_response = requests.post(base_url, headers=headers, data=json.dumps(record_data))
         create_response.raise_for_status()  # 捕获创建请求的错误
-        print(f"✅ 成功：{subdomain}.{domain} → {new_ip}")
-        bulid_vless_urls(subdomain, domain)
+        print(f"✅ 成功：{sub_name}.{domain} → {ip}")
+        bulid_vless_urls(sub_name, domain)
         
     except requests.exceptions.RequestException as e:
-        error_msg = f"❌ {subdomain}.{domain} 操作失败：{str(e)}"
+        error_msg = f"❌ {sub_name}.{domain} 操作失败：{str(e)}"
         if hasattr(e, 'response') and e.response:
             error_msg += f"，响应：{e.response.text}"
         print(error_msg)
         raise Exception
 
 def update_A_cfip():
+    base_url = f"https://api.dynu.com/v2/dns"
+    response = requests.get(base_url, headers=headers)
+    response.raise_for_status()
+    all_records = response.json()['domains']
+    
     urls = [
         'https://ip.164746.xyz',
         'https://ipdb.api.030101.xyz/?type=bestcf&country=true',
@@ -71,15 +69,17 @@ def update_A_cfip():
         unique_ips.update(ip_matches)
             
     if unique_ips:
-        for ip in unique_ips:
-            try:
-                update_dynv6_a_via_api(ip, i)
-            except Exception as e:
-                break
-            i += 1                
-            if i > 40:
-                break
-
+        for record in all_records:
+            for ip in unique_ips:
+                try:
+                    update_dynv6_a_via_api(ip, i, record['name'], record['id'])
+                    i += 1
+                except Exception as e:
+                    break
+                if i > 40:
+                    return    
+            continue                
+            
 def bulid_vless_urls(a, b):
     global vless_urls
     vless_url = f"vless://e3713ba4-a8fc-44ec-b401-3b736e67718d@{a}.{b}:443?path=%2F%3Fed%3D2560&security=tls&encryption=none&host=cfv.live-zxs.dns.army&type=ws&sni=cfv.live-zxs.dns.army#{a}"
