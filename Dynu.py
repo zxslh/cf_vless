@@ -4,35 +4,37 @@ import re
 import os
 
 def update_dynv6_a_via_api(ip, sub_name):
-    
-    base_url = f"https://api.dynu.com/v2/dns/10251176/record"
-    api_token = 'bXV3VU6f2bagfYdVdYTU62U5Ud363366'
-    domain = 'zxs.ddnsfree.com'
-    
     subdomain = str(sub_name)  # 确保子域名为字符串类型
     new_ip = ip
     ttl = 3600
-
+    record_data = {
+        "nodeName": subdomain,
+        "recordType": "A",
+        "ipv4Address": new_ip,
+        "ttl": ttl,
+        "state": True,
+        "group": ""
+    }
+    api_token = 'bXV3VU6f2bagfYdVdYTU62U5Ud363366'
+    domain = 'as-zxs.ddnsfree.com'
+    
     headers = {
         "accept": "application/json",
         "API-Key": api_token
     }
 
     try:
+        base_url = f'https://api.dynu.com/v2/dns/getroot/{domain}'
         response = requests.get(base_url, headers=headers)
         response.raise_for_status()
-        all_records = response.json()
+        id = response.json()['id']
+        base_url = f"https://api.dynu.com/v2/dns/{id}/record"
         
-        record_data = {
-            "nodeName": subdomain,
-            "recordType": "A",
-            "ipv4Address": new_ip,
-            "ttl": ttl,
-            "state": True,
-            "group": ""
-        }
+        response = requests.get(base_url, headers=headers)
+        response.raise_for_status()
+        all_records = response.json()['dnsRecords']
         
-        for record in all_records['dnsRecords']:
+        for record in all_records:
             if record["nodeName"] == subdomain and record["recordType"] == "A":
                 base_url = f"{base_url}/{record['id']}"                
                 break
