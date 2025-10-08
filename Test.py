@@ -35,7 +35,7 @@ def update_dynv6_a_via_api(ip, sub_name):
         
         for record in all_records:
             if record["nodeName"] == subdomain and record["recordType"] == "A":
-                renew_response = requests.patch(f"{base_url}/{record['id']}", headers=headers, data=json.dumps(record_data))
+                renew_response = requests.post(f"{base_url}/{record['id']}", headers=headers, data=json.dumps(record_data))
                 renew_response.raise_for_status()  # 捕获创建请求的错误     
                 print(f"✅ 更新成功：{subdomain}.{domain} → {new_ip}")
                 bulid_vless_urls(subdomain, domain)
@@ -87,7 +87,7 @@ if __name__ == "__main__":
     vless_urls = []
     update_A_cfip()
     try:
-        with open('index.html', 'w', encoding='utf-8') as file:
+        with open('test.txt', 'w', encoding='utf-8') as file:
             for vless_url in vless_urls:
                 file.write(f'{vless_url}\n')
             print(f'✅ 写入成功！')
