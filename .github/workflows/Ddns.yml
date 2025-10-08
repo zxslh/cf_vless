@@ -28,7 +28,7 @@ jobs:
         pip install dnspython
                 
     - name: Run script
-      run: python ${{ github.workspace }}/update_ddns.py
+      run: python ${{ github.workspace }}/Ddns.py
 
     - name: Delete workflow runs
       uses: Mattraks/delete-workflow-runs@v2
