@@ -25,6 +25,8 @@ def update_dynv6_a_via_api(ip, sub_name):
         response = requests.get(base_url, headers=headers)
         response.raise_for_status()
         all_records = response.json()
+        print(response.text)
+        return
 
         record_data = {
             "nodeName": subdomain,
@@ -76,6 +78,7 @@ def update_A_cfip():
     if unique_ips:
         for ip in unique_ips:
             update_dynv6_a_via_api(ip, i)
+            return
             i += 1
             if i > 40:
                 break
