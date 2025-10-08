@@ -31,7 +31,7 @@ def update_dynv6_a_via_api(ip, sub_name):
             "recordType": "A",
             "ipv4Address": new_ip,
             "ttl": ttl,
-            "state": true,
+            "state": True,
             "group": ""
         }
         
