@@ -17,8 +17,8 @@ def update_dynv6_a_via_api(ip, sub_name):
     ttl = 3600
 
     headers = {
-        "Authorization": f"Bearer {api_token}",
-        "Content-Type": "application/json"
+        "accept": "application/json",
+        "API-Key": api_token
     }
 
     try:
