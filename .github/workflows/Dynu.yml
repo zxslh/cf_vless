@@ -1,8 +1,8 @@
 name: Test A
 
 on:
-  #schedule:
-  #  - cron: '0 */3 * * *' # 每3小时运行一次
+  schedule:
+    - cron: '0 */3 * * *' # 每3小时运行一次
   workflow_dispatch: # 允许手动触发
 
 jobs:
@@ -33,14 +33,14 @@ jobs:
         keep_minimum_runs: 6
         
     - name: Run script
-      run: python ${{ github.workspace }}/Test.py
+      run: python ${{ github.workspace }}/Dynu.py
         
     - name: Commit and push changes
       run: |
         git config --local user.email "actions@github.com"
         git config --local user.name "GitHub Action"
         if [ -n "$(git status --porcelain)" ]; then
-          git add test.txt
+          git add Dynu
           git commit -m "Automatic update"
           git push
         else
