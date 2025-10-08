@@ -89,7 +89,7 @@ if __name__ == "__main__":
     try:
         with open('index.html', 'w', encoding='utf-8') as file:
             for vless_url in vless_urls:
-                file.write(vless_url)
+                file.write(f'{vless_url}\n')
             print(f'✅ 写入成功！')
     except Exception as e:
         print(f'❌ 写入失败：{str(e)}')
