@@ -1,13 +1,13 @@
-name: Update IP List
+name: Update A
 
 on:
   schedule:
-    - cron: '0 */6 * * *' # 每3小时运行一次
+    - cron: '0 */3 * * *' # 每3小时运行一次
   workflow_dispatch: # 允许手动触发
 
 jobs:
 
-  update-ip-list:
+  update-A-list:
     runs-on: ubuntu-latest
     
     steps:
