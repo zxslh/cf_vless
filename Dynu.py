@@ -56,22 +56,24 @@ def update_A_cfip():
     unique_ips = set()
     ip_pattern = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
     i = 11  # 子域名起始编号（如10、11、12...）
+    j = 0
     
     for url in urls:
         response = requests.get(url, timeout=10).text
         ip_matches = re.findall(ip_pattern, response, re.IGNORECASE)
         unique_ips.update(ip_matches)
-            
-    if unique_ips:
+    ip_list = list(unique_ips)
+    if ip_list:
         for record in all_records:
-            for ip in unique_ips:
+            for ip in ip_list[j:]:
                 try:
                     update_dynv6_a_via_api(ip, i, record['name'], record['id'])
                     i += 1
                 except Exception as e:
                     break
                 if i > 40:
-                    return    
+                    return
+            j = i - 11
             continue                
             
 def bulid_vless_urls(a, b):
