@@ -79,7 +79,7 @@ def update_A_cfip():
             
 def bulid_vless_urls(a, b):
     global vless_urls
-    vless_url = f"vless://e3713ba4-a8fc-44ec-b401-3b736e67718d@{a}.{b}:443?path=%2F%3Fed%3D2560&security=tls&encryption=none&host=cfv.live-zxs.dns.army&type=ws&sni=cfv.live-zxs.dns.army#{a}"
+    vless_url = f"vless://e3713ba4-a8fc-44ec-b401-3b736e67718d@{a}.{b}:443?path=%2F%3Fed%3D2560&security=tls&encryption=none&host=cfv.live-zxs.dns.army&type=ws&sni=cfv.live-zxs.dns.army#"
     vless_urls.append(vless_url)
 
 if __name__ == "__main__":
@@ -91,9 +91,11 @@ if __name__ == "__main__":
     }    
     update_A_cfip()
     try:
+        i = 11
         with open('dynu.txt', 'w', encoding='utf-8') as file:
             for vless_url in vless_urls:
-                file.write(f'{vless_url}\n')
+                file.write(f'{vless_url}{i}\n')
+                i += 1
             print(f'✅ 写入成功！')
     except Exception as e:
         print(f'❌ 写入失败：{str(e)}')
