@@ -47,6 +47,7 @@ def update_dynv6_a_via_api(ip, sub_name):
         if hasattr(e, 'response') and e.response:
             error_msg += f"，响应：{e.response.text}"
         print(error_msg)
+        raise Exception
 
 def update_A_cfip():
     urls = [
@@ -69,8 +70,11 @@ def update_A_cfip():
             
     if unique_ips:
         for ip in unique_ips:
-            update_dynv6_a_via_api(ip, i)
-            i += 1
+            try:
+                update_dynv6_a_via_api(ip, i)
+            except Exception as e:
+                break
+            i += 1                
             if i > 40:
                 break
 
@@ -83,7 +87,7 @@ if __name__ == "__main__":
     vless_urls = []
     update_A_cfip()
     try:
-        with open('test.txt', 'w', encoding='utf-8') as file:
+        with open('dynu.txt', 'w', encoding='utf-8') as file:
             for vless_url in vless_urls:
                 file.write(f'{vless_url}\n')
             print(f'✅ 写入成功！')
