@@ -1,4 +1,4 @@
-vless://e3713ba4-a8fc-44ec-b401-3b736e67718d@11.zxs.ddnsfree.com:443?path=%2F%3Fed%3D2560&security=tls&encryption=none&host=cfv.live-zxs.dns.army&type=ws&sni=cfv.live-zxs.dns.army#11
-vless://e3713ba4-a8fc-44ec-b401-3b736e67718d@12.zxs.ddnsfree.com:443?path=%2F%3Fed%3D2560&security=tls&encryption=none&host=cfv.live-zxs.dns.army&type=ws&sni=cfv.live-zxs.dns.army#12
-vless://e3713ba4-a8fc-44ec-b401-3b736e67718d@13.zxs.ddnsfree.com:443?path=%2F%3Fed%3D2560&security=tls&encryption=none&host=cfv.live-zxs.dns.army&type=ws&sni=cfv.live-zxs.dns.army#13
-vless://e3713ba4-a8fc-44ec-b401-3b736e67718d@14.zxs.ddnsfree.com:443?path=%2F%3Fed%3D2560&security=tls&encryption=none&host=cfv.live-zxs.dns.army&type=ws&sni=cfv.live-zxs.dns.army#14
+vless://e3713ba4-a8fc-44ec-b401-3b736e67718d@11.as-zxs.ddnsfree.com:443?path=%2F%3Fed%3D2560&security=tls&encryption=none&host=cfv.live-zxs.dns.army&type=ws&sni=cfv.live-zxs.dns.army#11
+vless://e3713ba4-a8fc-44ec-b401-3b736e67718d@12.as-zxs.ddnsfree.com:443?path=%2F%3Fed%3D2560&security=tls&encryption=none&host=cfv.live-zxs.dns.army&type=ws&sni=cfv.live-zxs.dns.army#12
+vless://e3713ba4-a8fc-44ec-b401-3b736e67718d@13.as-zxs.ddnsfree.com:443?path=%2F%3Fed%3D2560&security=tls&encryption=none&host=cfv.live-zxs.dns.army&type=ws&sni=cfv.live-zxs.dns.army#13
+vless://e3713ba4-a8fc-44ec-b401-3b736e67718d@14.as-zxs.ddnsfree.com:443?path=%2F%3Fed%3D2560&security=tls&encryption=none&host=cfv.live-zxs.dns.army&type=ws&sni=cfv.live-zxs.dns.army#14
