@@ -25,7 +25,7 @@ def update_dynv6_a_via_api(ip, sub_name):
         response = requests.get(base_url, headers=headers)
         response.raise_for_status()
         all_records = response.json()
-        print(response.text)
+        print(all_records)
         return
 
         record_data = {
