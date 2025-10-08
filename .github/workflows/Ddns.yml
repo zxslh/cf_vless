@@ -1,0 +1,39 @@
+name: Update Ddns
+
+on:
+  schedule:
+    - cron: '0 */1 * * *' # 每小时运行一次
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+
+  update-ip-list:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: read
+      
+    steps:
+    - uses: actions/checkout@v3
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests
+        pip install dnspython
+                
+    - name: Run script
+      run: python ${{ github.workspace }}/update_ddns.py
+
+    - name: Delete workflow runs
+      uses: Mattraks/delete-workflow-runs@v2
+      with:
+        token: ${{ github.token }}
+        repository: ${{ github.repository }}
+        retain_days: 0
+        keep_minimum_runs: 4
