@@ -1,0 +1,1 @@
+vless://77146000-d7ce-493d-98ad-b913a79c12cd@11.zxs.ddnsfree.com:443?path=%2F%3Fed%3D2560&security=tls&encryption=none&host=771.qq-zxs.dns.army&type=ws&sni=771.qq-zxs.dns.army#11
