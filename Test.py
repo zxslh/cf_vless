@@ -4,9 +4,6 @@ import re
 import os
 
 def update_dynv6_a_via_api(ip, sub_name):
-    #base_url = f"https://dynv6.com/api/v2/zones/5074729/records" #cf-zxs.v6.rocks
-    #api_token = 'xCsd_Hpo89auyq_kVF19QHGqLeQQ6b'
-    #domain = 'cf-zxs.v6.rocks'
     
     base_url = f"https://api.dynu.com/v2/dns/10251176/record"
     api_token = 'bXV3VU6f2bagfYdVdYTU62U5Ud363366'
@@ -37,15 +34,12 @@ def update_dynv6_a_via_api(ip, sub_name):
         
         for record in all_records['dnsRecords']:
             if record["nodeName"] == subdomain and record["recordType"] == "A":
-                renew_response = requests.post(f"{base_url}/{record['id']}", headers=headers, data=json.dumps(record_data))
-                renew_response.raise_for_status()  # 捕获创建请求的错误     
-                print(f"✅ 更新成功：{subdomain}.{domain} → {new_ip}")
-                bulid_vless_urls(subdomain, domain)
-                return
+                base_url = f"{base_url}/{record['id']}"                
+                break
                 
         create_response = requests.post(base_url, headers=headers, data=json.dumps(record_data))
         create_response.raise_for_status()  # 捕获创建请求的错误
-        print(f"✅ 创建成功：{subdomain}.{domain} → {new_ip}")
+        print(f"✅ 成功：{subdomain}.{domain} → {new_ip}")
         bulid_vless_urls(subdomain, domain)
         
     except requests.exceptions.RequestException as e:
@@ -76,14 +70,13 @@ def update_A_cfip():
     if unique_ips:
         for ip in unique_ips:
             update_dynv6_a_via_api(ip, i)
-            return
             i += 1
             if i > 40:
                 break
 
 def bulid_vless_urls(a, b):
     global vless_urls
-    vless_url = f"vless://77146000-d7ce-493d-98ad-b913a79c12cd@{a}.{b}:443?path=%2F%3Fed%3D2560&security=tls&encryption=none&host=771.qq-zxs.dns.army&type=ws&sni=771.qq-zxs.dns.army#{a}"
+    vless_url = f"vless://e3713ba4-a8fc-44ec-b401-3b736e67718d@{a}.{b}:443?path=%2F%3Fed%3D2560&security=tls&encryption=none&host=cfv.live-zxs.dns.army&type=ws&sni=cfv.live-zxs.dns.army#{a}"
     vless_urls.append(vless_url)
 
 if __name__ == "__main__":
