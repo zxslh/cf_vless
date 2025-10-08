@@ -71,9 +71,10 @@ def update_A_cfip():
                     i += 1
                 except Exception as e:
                     break
-                if i > 40:
+                if j > 30:
                     return
-            j = i - 11
+            j = j + i - 11
+            i = 11
             continue                
             
 def bulid_vless_urls(a, b):
