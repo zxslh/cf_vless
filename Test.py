@@ -25,12 +25,14 @@ def update_dynv6_a_via_api(ip, sub_name):
         response = requests.get(base_url, headers=headers)
         response.raise_for_status()
         all_records = response.json()
-        
+
         record_data = {
             "nodeName": subdomain,
             "recordType": "A",
             "ipv4Address": new_ip,
-            "ttl": ttl
+            "ttl": ttl,
+            "state": true,
+            "group": ""
         }
         
         for record in all_records:
