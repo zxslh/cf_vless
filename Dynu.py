@@ -14,12 +14,6 @@ def update_dynv6_a_via_api(ip, sub_name, domain, id):
         "state": True,
         "group": ""
     }
-    api_token = 'bXV3VU6f2bagfYdVdYTU62U5Ud363366'
-    
-    headers = {
-        "accept": "application/json",
-        "API-Key": api_token
-    }
 
     try:
         base_url = f"https://api.dynu.com/v2/dns/{id}/record"
@@ -87,6 +81,11 @@ def bulid_vless_urls(a, b):
 
 if __name__ == "__main__":
     vless_urls = []
+    api_token = 'bXV3VU6f2bagfYdVdYTU62U5Ud363366'
+    headers = {
+        "accept": "application/json",
+        "API-Key": api_token
+    }    
     update_A_cfip()
     try:
         with open('dynu.txt', 'w', encoding='utf-8') as file:
