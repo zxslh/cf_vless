@@ -32,6 +32,8 @@ jobs:
     - name: Run script
       env:
         DYNU_TOKEN: ${{ secrets.DYNU_TOKEN }}
+        QQ_771_URL: ${{ QQ_771_URL }}
+        QQ_771_TOKEN: ${{ secrets.QQ_771_TOKEN }}
       run: python ${{ github.workspace }}/Dynu.py
         
     - name: Commit and push changes
