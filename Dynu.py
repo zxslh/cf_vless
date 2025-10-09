@@ -78,9 +78,9 @@ def update_A_cfip():
             
 def bulid_vless_urls(a, b):
     global vless_urls
-    uuid = 'e3713ba4-a8fc-44ec-b401-3b736e67718d'
+    uuid = os.getenv('LIVE_CFV_TOKEN')
     port = '443'
-    host = 'cfv.live-zxs.dns.army'
+    host = os.getenv('LIVE_CFV_URL')
     vless_url = f"vless://{uuid}@{a}.{b}:{port}?path=%2F%3Fed%3D2560&security=tls&encryption=none&host={host}&type=ws&sni={host}#{a}{b[0]}"
     vless_urls.append(vless_url)
 
