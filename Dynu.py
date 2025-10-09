@@ -98,5 +98,5 @@ if __name__ == "__main__":
         print(e)
     with open('dynu.txt', 'w', encoding='utf-8') as file:
         for vless_url in vless_urls:
-            file.write(f'{vless_url}{i}\n')
+            file.write(f'{vless_url}\n')
         print(f'✅ 写入成功！')
