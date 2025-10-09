@@ -63,7 +63,8 @@ def update_A_cfip():
         return
         
     with open('ip.txt', 'w', encoding='utf-8') as file:
-        file.write(all_ips)
+        for ips in all_ips:
+            file.write(ips)
         
     try:
         response = requests.get(base_url, headers=headers)
