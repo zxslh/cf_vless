@@ -33,6 +33,8 @@ jobs:
         keep_minimum_runs: 6
         
     - name: Run script
+      env:
+        DYNU_TOKEN: ${{ secrets.DYNU_TOKEN }}
       run: python ${{ github.workspace }}/Dynu.py
         
     - name: Commit and push changes
