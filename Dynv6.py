@@ -10,6 +10,7 @@ def update_dynv6_a_via_api(ip, sub_name):
         response = requests.get(base_url, headers=headers)
         response.raise_for_status()
         all_records = response.json()
+        print('✅ 获取记录成功')
         
         record_data = {
             "name": sub_name,
@@ -35,7 +36,7 @@ def update_dynv6_a_via_api(ip, sub_name):
         if hasattr(e, 'response') and e.response:
             error_msg += f"，响应：{e.response.text}"
         print(error_msg)
-        raise Exception
+        raise Exception e
 
 def update_A_cfip():
     urls = [
@@ -92,13 +93,13 @@ if __name__ == "__main__":
     api_token = os.getenv('DYNV6_TOKEN')
     domain = 'cf-zxs.dns.army'
     ttl = 3600
+    headers = {
+        "Authorization": f"Bearer {api_token}",
+        "Content-Type": "application/json"
+    }
     if not api_token:
         print('❌ 需要TOKEN')
     else:
-        headers = {
-            "Authorization": f"Bearer {api_token}",
-            "Content-Type": "application/json"
-        }
         try:
             update_A_cfip()
         except Exception as e:
