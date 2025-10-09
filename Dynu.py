@@ -74,8 +74,7 @@ def update_A_cfip():
                     j += 1
                 except Exception as e:
                     break
-                if j > 30:
-                    return
+                if j > 30: return
             i = 11
             continue                
             
