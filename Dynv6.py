@@ -80,18 +80,17 @@ if __name__ == "__main__":
     api_token = os.getenv('DYNV6_TOKEN')
     if not api_token:
         print('需要token')
-        return
-    ttl = 3600
-    headers = {
-        "Authorization": f"Bearer {api_token}",
-        "Content-Type": "application/json"
-    }
-    update_A_cfip()
-    try:
-        with open('index.html', 'w', encoding='utf-8') as file:
-            for vless_url in vless_urls:
-                file.write(f'{vless_url}\n')
+    else:
+        headers = {
+            "Authorization": f"Bearer {api_token}",
+            "Content-Type": "application/json"
+        }
+        update_A_cfip()
+        try:
+            with open('index.html', 'w', encoding='utf-8') as file:
+                for vless_url in vless_urls:
+                    file.write(f'{vless_url}\n')
             print(f'✅ 写入成功！')
-    except Exception as e:
-        print(f'❌ 写入失败：{str(e)}')
+        except Exception as e:
+            print(f'❌ 写入失败：{str(e)}')
 
