@@ -65,7 +65,7 @@ def update_A_cfip():
     with open('ip.txt', 'w', encoding='utf-8') as file:
         for ips in all_ips:
             file.write(ips)
-        file.write(f'\n去重后IP个数：{len(unique_ips)}\n{unique_ips}'
+        file.write(f'\n去重后IP个数：{len(unique_ips)}\n{unique_ips}')
         return
         
     try:
