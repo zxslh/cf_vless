@@ -88,14 +88,14 @@ if __name__ == "__main__":
     headers = {
         "accept": "application/json",
         "API-Key": api_token
-    }    
-    update_A_cfip()
+    } 
     try:
-        i = 11
-        with open('dynu.txt', 'w', encoding='utf-8') as file:
-            for vless_url in vless_urls:
-                file.write(f'{vless_url}{i}\n')
-                i += 1
-            print(f'✅ 写入成功！')
-    except Exception as e:
-        print(f'❌ 写入失败：{str(e)}')
+        update_A_cfip()
+    except Exception as e:  
+        print(e)
+    i = 11
+    with open('dynu.txt', 'w', encoding='utf-8') as file:
+        for vless_url in vless_urls:
+            file.write(f'{vless_url}{i}\n')
+            i += 1
+        print(f'✅ 写入成功！')
