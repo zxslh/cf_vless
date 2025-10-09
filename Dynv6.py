@@ -68,11 +68,8 @@ def update_A_cfip():
             
     if unique_ips:
         for ip in unique_ips:
-            try:
-                update_dynv6_a_via_api(ip, i)
-                i += 1
-            except Exception as e:
-                break
+            update_dynv6_a_via_api(ip, i)
+            i += 1
             if i > 40: break
 
 def bulid_vless_urls(a, b):
