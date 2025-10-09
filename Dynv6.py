@@ -5,7 +5,7 @@ import os
 
 def update_dynv6_a_via_api(ip, sub_name, domain, zoneID):
 
-    base_url = f"https://dynv6.com/api/v2/zones/{zoneID}/records" #cf-zxs.dns.army
+    base_url = f"https://dynv6.com/api/v2/zones/{zoneID}/records"
 
     record_data = {
         "name": str(sub_name),
@@ -30,11 +30,8 @@ def update_dynv6_a_via_api(ip, sub_name, domain, zoneID):
         create_response.raise_for_status()  # 捕获创建请求的错误
         print(f"✅ 创建成功：{sub_name}.{domain} → {ip}")
         
-    except requests.exceptions.RequestException as e:
-        error_msg = f"❌ {sub_name}.{domain} 操作失败：{str(e)}"
-        if hasattr(e, 'response') and e.response:
-            error_msg += f"，响应：{e.response.text}"
-        print(error_msg)
+    except Exception as e:
+        print(f"❌ {sub_name}.{domain} 操作失败：{str(e)}")
         raise
 
 def update_A_cfip():
