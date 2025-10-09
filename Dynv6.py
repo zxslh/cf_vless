@@ -46,7 +46,6 @@ def update_A_cfip():
     unique_ips = set()
     all_ips = []
     ip_pattern = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
-    i = 11  # 子域名起始编号（如10、11、12...）
     
     for url in urls:
         try:
@@ -78,8 +77,9 @@ def update_A_cfip():
         if not zoneID: raise
     except Exception as e:
         print(f'❌ 获取区域信息失败：{str(e)}')
-        return 
+        return
         
+    i = 11
     for ip in unique_ips:
         try:
             update_dynv6_a_via_api(ip, str(i), domain, zoneID)
