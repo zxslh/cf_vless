@@ -11,7 +11,11 @@ def update_dynv6_a_via_api(ip, sub_name):
         response.raise_for_status()
         all_records = response.json()
         print('✅ 获取记录成功')
-        
+    except Exception as e:
+        print(f'❌ 获取记录失败：{str(e)}')
+        return
+         
+     try: 
         record_data = {
             "name": sub_name,
             "type": "A",
@@ -29,14 +33,12 @@ def update_dynv6_a_via_api(ip, sub_name):
         create_response = requests.post(base_url, headers=headers, data=json.dumps(record_data))
         create_response.raise_for_status()  # 捕获创建请求的错误
         print(f"✅ 创建成功：{sub_name}.{domain} → {ip}")
-        
-        
+       
     except requests.exceptions.RequestException as e:
         error_msg = f"❌ {sub_name}.{domain} 操作失败：{str(e)}"
         if hasattr(e, 'response') and e.response:
             error_msg += f"，响应：{e.response.text}"
         print(error_msg)
-        raise Exception e
 
 def update_A_cfip():
     urls = [
