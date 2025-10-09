@@ -6,7 +6,10 @@ import os
 def update_dynv6_a_via_api(ip, sub_name):
 
     base_url = f"https://dynv6.com/api/v2/zones/5071717/records" #cf-zxs.dns.army
-    api_token = 'vTTXvP2dGw8dtHjwFRXXjVfWL1rcLU'
+    api_token = os.getenv('DYNV6_TOKEN')
+    if not api_token:
+        print('❌ 需要TOKEN')
+        return
     domain = 'cf-zxs.dns.army'
     
     subdomain = str(sub_name)  # 确保子域名为字符串类型
@@ -48,6 +51,7 @@ def update_dynv6_a_via_api(ip, sub_name):
         if hasattr(e, 'response') and e.response:
             error_msg += f"，响应：{e.response.text}"
         print(error_msg)
+        raise
 
 def update_A_cfip():
     urls = [
@@ -64,15 +68,24 @@ def update_A_cfip():
     i = 11  # 子域名起始编号（如10、11、12...）
     
     for url in urls:
-        response = requests.get(url, timeout=10).text
-        ip_matches = re.findall(ip_pattern, response, re.IGNORECASE)
-        unique_ips.update(ip_matches)
+        try:
+            response = requests.get(url, timeout=10).text
+            ip_matches = re.findall(ip_pattern, response, re.IGNORECASE)
+            unique_ips.update(ip_matches)
+        except Exception as e:
+            print(f'❌ 错误：{str(e)}')
+            continue
             
     if unique_ips:
         for ip in unique_ips:
-            update_dynv6_a_via_api(ip, i)
+            try:
+                update_dynv6_a_via_api(ip, i)
+            except Exception as e:
+                break
             i += 1
             if i > 40: break
+    else:
+        print('❌ 获取CFIP失败')
 
 def bulid_vless_urls(a, b):
     global vless_urls
