@@ -15,7 +15,7 @@ def update_dynv6_a_via_api(ip, sub_name):
         print(f'❌ 获取记录失败：{str(e)}')
         raise e
          
-     try: 
+    try: 
         record_data = {
             "name": sub_name,
             "type": "A",
