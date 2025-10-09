@@ -9,7 +9,7 @@ def update_dynv6_a_via_api(ip, sub_name):
     #domain = 'cf-zxs.v6.rocks'
     
     base_url = f"https://dynv6.com/api/v2/zones/5071717/records" #cf-zxs.dns.army
-    api_token = 'vTTXvP2dGw8dtHjwFRXXjVfWL1rcLU'
+    api_token = os.getenv('DYNV6_TOKEN')
     domain = 'cf-zxs.dns.army'
     
     subdomain = str(sub_name)  # 确保子域名为字符串类型
