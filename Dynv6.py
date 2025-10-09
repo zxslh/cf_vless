@@ -52,15 +52,19 @@ def update_A_cfip():
             response = requests.get(url, timeout=10).text
             ip_matches = re.findall(ip_pattern, response, re.IGNORECASE)
             unique_ips.update(ip_matches)
-            with open('ip.txt', 'w', encoding='utf-8') as file:
-                file.write(f'{url}\n{ip_matches}\n')
+            all_ips.append(f'{url}：{len(ip_matches)}\n{ip_matches}\n')
+            
         except Exception as e:
             print(f'❌ 错误：{str(e)}')
             continue
     if not unique_ips:
         print('❌ 错误：获取CFIP失败')
         return
-
+        
+    with open('ip.txt', 'w', encoding='utf-8') as file:
+        file.write(all_ips)
+        return
+        
     try:
         response = requests.get(base_url, headers=headers)
         response.raise_for_status()
