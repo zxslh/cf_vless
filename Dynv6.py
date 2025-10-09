@@ -7,32 +7,28 @@ def update_dynv6_a_via_api(ip, sub_name, domain, zoneID):
 
     base_url = f"https://dynv6.com/api/v2/zones/{zoneID}/records" #cf-zxs.dns.army
 
-    ttl = 3600
-
+    record_data = {
+        "name": str(sub_name),
+        "type": "A",
+        "data": ip,
+        "ttl": 3600
+    }
+    
     try:
         response = requests.get(base_url, headers=headers)
         response.raise_for_status()
         all_records = response.json()
-        
-        record_data = {
-            "name": str(sub_name),
-            "type": "A",
-            "data": ip,
-            "ttl": ttl
-        }
         
         for record in all_records:
             if record["name"] == str(sub_name) and record["type"] == "A":
                 renew_response = requests.patch(f"{base_url}/{record['id']}", headers=headers, data=json.dumps(record_data))
                 renew_response.raise_for_status()  # 捕获创建请求的错误     
                 print(f"✅ 更新成功：{sub_name}.{domain} → {ip}")
-                bulid_vless_urls(sub_name, domain)
                 return
                 
         create_response = requests.post(base_url, headers=headers, data=json.dumps(record_data))
         create_response.raise_for_status()  # 捕获创建请求的错误
         print(f"✅ 创建成功：{sub_name}.{domain} → {ip}")
-        bulid_vless_urls(sub_name, domain)
         
     except requests.exceptions.RequestException as e:
         error_msg = f"❌ {sub_name}.{domain} 操作失败：{str(e)}"
@@ -78,8 +74,9 @@ def update_A_cfip():
             if domain == record['name']:
                 zoneID = record['id']
                 break
-        if not zoneID: return
+        if not zoneID: raise
     except Exception as e:
+        print(f'❌ 获取区域信息失败：{str(e)}')
         return 
         
     for ip in unique_ips:
@@ -87,6 +84,7 @@ def update_A_cfip():
             update_dynv6_a_via_api(ip, str(i), domain, zoneID)
         except Exception as e:
             break
+        bulid_vless_urls(str(i), domain)
         i += 1
         if i > 40: break
 
@@ -106,16 +104,15 @@ if __name__ == "__main__":
     api_token = os.getenv('DYNV6_TOKEN')
     if not api_token:
         print('❌ 需要TOKEN')
-    headers = {
-        "Authorization": f"Bearer {api_token}",
-        "Content-Type": "application/json"
-    }
-    update_A_cfip()
-    try:
+    else:
+        headers = {
+            "Authorization": f"Bearer {api_token}",
+            "Content-Type": "application/json"
+        }
+        update_A_cfip()
         with open('index.html', 'w', encoding='utf-8') as file:
             for vless_url in vless_urls:
                 file.write(f'{vless_url}\n')
             print(f'✅ 写入成功！')
-    except Exception as e:
-        print(f'❌ 写入失败：{str(e)}')
+
 
