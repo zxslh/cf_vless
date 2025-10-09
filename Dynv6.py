@@ -15,14 +15,14 @@ def update_dynv6_a_via_api(ip, sub_name, domain, zoneID):
         all_records = response.json()
         
         record_data = {
-            "name": sub_name,
+            "name": str(sub_name),
             "type": "A",
             "data": ip,
             "ttl": ttl
         }
         
         for record in all_records:
-            if record["name"] == sub_name and record["type"] == "A":
+            if record["name"] == str(sub_name) and record["type"] == "A":
                 renew_response = requests.patch(f"{base_url}/{record['id']}", headers=headers, data=json.dumps(record_data))
                 renew_response.raise_for_status()  # 捕获创建请求的错误     
                 print(f"✅ 更新成功：{sub_name}.{domain} → {ip}")
