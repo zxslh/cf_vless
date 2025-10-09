@@ -6,7 +6,6 @@ import os
 def update_dynv6_a_via_api(ip, sub_name, domain, zoneID):
 
     base_url = f"https://dynv6.com/api/v2/zones/{zoneID}/records"
-
     record_data = {
         "name": str(sub_name),
         "type": "A",
@@ -29,7 +28,6 @@ def update_dynv6_a_via_api(ip, sub_name, domain, zoneID):
         create_response = requests.post(base_url, headers=headers, data=json.dumps(record_data))
         create_response.raise_for_status()  # 捕获创建请求的错误
         print(f"✅ 创建成功：{sub_name}.{domain} → {ip}")
-        
     except Exception as e:
         print(f"❌ {sub_name}.{domain} 操作失败：{str(e)}")
         raise
