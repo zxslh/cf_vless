@@ -9,9 +9,7 @@ def update_dynv6_a_via_api(ip, sub_name):
     domain = 'cf-zxs.dns.army'
 
     try:
-        if not api_token:
-            print('需要token')
-            raise Exception
+
         response = requests.get(base_url, headers=headers)
         response.raise_for_status()
         all_records = response.json()
@@ -80,6 +78,9 @@ def bulid_vless_urls(a, b):
 if __name__ == "__main__":
     vless_urls = []
     api_token = os.getenv('DYNV6_TOKEN')
+    if not api_token:
+        print('需要token')
+        return
     ttl = 3600
     headers = {
         "Authorization": f"Bearer {api_token}",
