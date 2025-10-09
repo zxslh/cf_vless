@@ -72,7 +72,11 @@ def update_A_cfip():
 
 def bulid_vless_urls(a, b):
     global vless_urls
-    vless_url = f"vless://77146000-d7ce-493d-98ad-b913a79c12cd@{a}.{b}:443?path=%2F%3Fed%3D2560&security=tls&encryption=none&host=771.qq-zxs.dns.army&type=ws&sni=771.qq-zxs.dns.army#{a}"
+    uuid = os.getenv('QQ_771_TOKEN')
+    port = '443'
+    host = os.getenv('QQ_771_URL')
+    if not uuid or not host: return
+    vless_url = f"vless://{uuid}@{a}.{b}:{port}?path=%2F%3Fed%3D2560&security=tls&encryption=none&host={host}&type=ws&sni={host}#{a}{b[0]}"
     vless_urls.append(vless_url)
 
 if __name__ == "__main__":
