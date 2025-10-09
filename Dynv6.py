@@ -66,7 +66,6 @@ def update_A_cfip():
         for ips in all_ips:
             file.write(ips)
         file.write(f'\n去重后IP个数：{len(unique_ips)}\n{unique_ips}')
-        return
         
     try:
         response = requests.get(base_url, headers=headers)
