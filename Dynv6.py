@@ -56,9 +56,12 @@ def update_A_cfip():
     i = 11  # 子域名起始编号（如10、11、12...）
     
     for url in urls:
-        response = requests.get(url, timeout=10).text
-        ip_matches = re.findall(ip_pattern, response, re.IGNORECASE)
-        unique_ips.update(ip_matches)
+        try:
+            response = requests.get(url, timeout=10).text
+            ip_matches = re.findall(ip_pattern, response, re.IGNORECASE)
+            unique_ips.update(ip_matches)
+        except Exception as e:
+            continue
             
     if unique_ips:
         for ip in unique_ips:
