@@ -27,8 +27,8 @@ jobs:
       with:
         token: ${{ github.token }}
         repository: ${{ github.repository }}
-        retain_days: 2
-        keep_minimum_runs: 6
+        retain_days: 0
+        keep_minimum_runs: 4
         
     - name: Run script 
       env:
