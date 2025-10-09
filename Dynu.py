@@ -5,7 +5,6 @@ import os
 
 def update_dynv6_a_via_api(ip, sub_name, domain, id):
 
-    ttl = 3600
     record_data = {
         "nodeName": sub_name,
         "recordType": "A",
@@ -69,11 +68,11 @@ def update_A_cfip():
                 try:
                     update_dynv6_a_via_api(ip, i, record['name'], record['id'])
                     i += 1
+                    j += 1
                 except Exception as e:
                     break
                 if j > 30:
                     return
-            j = j + i - 11
             i = 11
             continue                
             
@@ -84,6 +83,7 @@ def bulid_vless_urls(a, b):
 
 if __name__ == "__main__":
     vless_urls = []
+    ttl = 3600
     api_token = os.getenv('DYNU_TOKEN')
     headers = {
         "accept": "application/json",
