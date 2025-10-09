@@ -28,7 +28,6 @@ def update_dynu_A(ip, sub_name, domain, id):
         create_response = requests.post(base_url, headers=headers, data=json.dumps(record_data))
         create_response.raise_for_status()  # 捕获创建请求的错误
         print(f"✅ 成功：{sub_name}.{domain} → {ip}")
-        bulid_vless_urls(sub_name, domain)
         
     except requests.exceptions.RequestException as e:
         error_msg = f"❌ {sub_name}.{domain} 操作失败：{str(e)}"
@@ -67,6 +66,7 @@ def update_A_cfip():
             for ip in ip_list[j:]:
                 try:
                     update_dynu_A(ip, i, record['name'], record['id'])
+                    bulid_vless_urls(i, record['name'])
                     i += 1
                     j += 1
                 except Exception as e:
@@ -78,7 +78,10 @@ def update_A_cfip():
             
 def bulid_vless_urls(a, b):
     global vless_urls
-    vless_url = f"vless://e3713ba4-a8fc-44ec-b401-3b736e67718d@{a}.{b}:443?path=%2F%3Fed%3D2560&security=tls&encryption=none&host=cfv.live-zxs.dns.army&type=ws&sni=cfv.live-zxs.dns.army#"
+    uuid = 'e3713ba4-a8fc-44ec-b401-3b736e67718d'
+    port = '443'
+    host = 'cfv.live-zxs.dns.army'
+    vless_url = f"vless://{uuid}@{a}.{b}:{port}?path=%2F%3Fed%3D2560&security=tls&encryption=none&host={host}&type=ws&sni={host}#{a}{b[0]}"
     vless_urls.append(vless_url)
 
 if __name__ == "__main__":
@@ -93,9 +96,7 @@ if __name__ == "__main__":
         update_A_cfip()
     except Exception as e:  
         print(e)
-    i = 11
     with open('dynu.txt', 'w', encoding='utf-8') as file:
         for vless_url in vless_urls:
             file.write(f'{vless_url}{i}\n')
-            i += 1
         print(f'✅ 写入成功！')
