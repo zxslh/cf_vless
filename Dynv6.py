@@ -44,7 +44,7 @@ def update_A_cfip():
     ]
     
     unique_ips = set()
-    all_ip = []
+    all_ips = []
     ip_pattern = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
     i = 11  # 子域名起始编号（如10、11、12...）
     
