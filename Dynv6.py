@@ -57,6 +57,7 @@ def update_A_cfip():
             ip_matches = re.findall(ip_pattern, response, re.IGNORECASE)
             unique_ips.update(ip_matches)
         except Exception as e:
+            print(f'❌ 失败3：{str(e)}')
             continue
             
     if not unique_ips:
@@ -71,6 +72,7 @@ def update_A_cfip():
             bulid_vless_urls(i)
             i += 1
         except Exception as e:
+            print(f'❌ 失败2：{str(e)}')
             break
         if i > 40: break
 
