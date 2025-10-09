@@ -32,7 +32,6 @@ jobs:
     - name: Run script
       env:
         DYNU_TOKEN: ${{ secrets.DYNU_TOKEN }}
-        LIVE_CFV_URL: ${{ secrets.LIVE_CFV_URL }}
         LIVE_CFV_TOKEN: ${{ secrets.LIVE_CFV_TOKEN }}
       run: python ${{ github.workspace }}/Dynu.py
         
