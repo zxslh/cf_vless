@@ -84,7 +84,7 @@ def update_A_cfip():
         
     for ip in unique_ips:
         try:
-            update_dynv6_a_via_api(ip, i, domain, zoneID)
+            update_dynv6_a_via_api(ip, str(i), domain, zoneID)
         except Exception as e:
             break
         i += 1
