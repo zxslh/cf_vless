@@ -44,6 +44,7 @@ def update_A_cfip():
     ]
     
     unique_ips = set()
+    all_ip = []
     ip_pattern = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
     i = 11  # 子域名起始编号（如10、11、12...）
     
@@ -63,7 +64,7 @@ def update_A_cfip():
         
     with open('ip.txt', 'w', encoding='utf-8') as file:
         file.write(all_ips)
-        
+        return
     try:
         response = requests.get(base_url, headers=headers)
         response.raise_for_status()
