@@ -58,13 +58,14 @@ def update_A_cfip():
         except Exception as e:
             print(f'❌ 错误：{str(e)}')
             continue
+            
     if not unique_ips:
         print('❌ 错误：获取CFIP失败')
         return
         
     with open('ip.txt', 'w', encoding='utf-8') as file:
         file.write(all_ips)
-        return
+        
     try:
         response = requests.get(base_url, headers=headers)
         response.raise_for_status()
