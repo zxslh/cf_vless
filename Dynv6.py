@@ -62,6 +62,8 @@ def update_A_cfip():
     if not unique_ips:
         print('❌ 获取CFIP失败')
         return
+    else:
+        print('✅ 获取CFIP成功')
         
     for ip in unique_ips:
         try:
