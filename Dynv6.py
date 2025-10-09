@@ -53,19 +53,7 @@ def update_A_cfip():
         'https://addressesapi.090227.xyz/CloudFlareYes',
         'https://vps789.com/openApi/cfIpApi'
     ]
-    domain = 'cf-zxs.dns.army'
-    base_url = "https://dynv6.com/api/v2/zones"
-    try:
-        response = requests.get(base_url, headers=headers)
-        response.raise_for_status()
-        all_records = response.json()
-        for record in all_records:
-            if domain == record['name']:
-                zoneID = record['id']
-                break
-        if not zoneID: return
-    except Exception as e:
-        return
+    
     unique_ips = set()
     ip_pattern = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
     i = 11  # 子域名起始编号（如10、11、12...）
@@ -78,17 +66,31 @@ def update_A_cfip():
         except Exception as e:
             print(f'❌ 错误：{str(e)}')
             continue
+    if not unique_ips:
+        print('❌ 错误：获取CFIP失败')
+        return
             
-    if unique_ips:
-        for ip in unique_ips:
-            try:
-                update_dynv6_a_via_api(ip, i, domain, zoneID)
-            except Exception as e:
+    domain = 'cf-zxs.dns.army'
+    base_url = "https://dynv6.com/api/v2/zones"
+    try:
+        response = requests.get(base_url, headers=headers)
+        response.raise_for_status()
+        all_records = response.json()
+        for record in all_records:
+            if domain == record['name']:
+                zoneID = record['id']
                 break
-            i += 1
-            if i > 40: break
-    else:
-        print('❌ 获取CFIP失败')
+        if not zoneID: return
+    except Exception as e:
+        return 
+        
+    for ip in unique_ips:
+        try:
+            update_dynv6_a_via_api(ip, i, domain, zoneID)
+        except Exception as e:
+            break
+        i += 1
+        if i > 40: break
 
 def bulid_vless_urls(a, b):
     global vless_urls
