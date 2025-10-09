@@ -91,6 +91,7 @@ if __name__ == "__main__":
     vless_urls = []
     api_token = os.getenv('DYNV6_TOKEN')
     domain = 'cf-zxs.dns.army'
+    ttl = 3600
     if not api_token:
         print('❌ 需要TOKEN')
     else:
