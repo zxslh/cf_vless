@@ -59,15 +59,18 @@ def update_A_cfip():
         except Exception as e:
             continue
             
-    if unique_ips:
-        for ip in unique_ips:
-            try:
-                update_dynv6_a_via_api(ip, i)
-                bulid_vless_urls(i)
-                i += 1
-            except Exception as e:
-                break
-            if i > 40: break
+    if not unique_ips:
+        print('❌ 获取CFIP失败')
+        return
+        
+    for ip in unique_ips:
+        try:
+            update_dynv6_a_via_api(ip, i)
+            bulid_vless_urls(i)
+            i += 1
+        except Exception as e:
+            break
+        if i > 40: break
 
 def bulid_vless_urls(a):
     global vless_urls
