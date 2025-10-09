@@ -83,7 +83,7 @@ def bulid_vless_urls(a, b):
     global vless_urls
     uuid = os.getenv('LIVE_CFV_TOKEN')
     port = '443'
-    host = os.getenv('LIVE_CFV_URL')
+    host = 'cfv.live-zxs.dns.army'
     if not uuid or not host: return
     vless_url = f"vless://{uuid}@{a}.{b}:{port}?path=%2F%3Fed%3D2560&security=tls&encryption=none&host={host}&type=ws&sni={host}#{a}{b[0]}"
     vless_urls.append(vless_url)
