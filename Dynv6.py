@@ -8,9 +8,6 @@ def update_dynv6_a_via_api(ip, sub_name):
     base_url = f"https://dynv6.com/api/v2/zones/5071717/records" #cf-zxs.dns.army
     api_token = os.getenv('DYNV6_TOKEN')
     domain = 'cf-zxs.dns.army'
-    
-    subdomain = str(sub_name)  # 确保子域名为字符串类型
-    new_ip = ip
     ttl = 3600
 
     headers = {
@@ -24,24 +21,24 @@ def update_dynv6_a_via_api(ip, sub_name):
         all_records = response.json()
         
         record_data = {
-            "name": subdomain,
+            "name": sub_name,
             "type": "A",
-            "data": new_ip,
+            "data": ip,
             "ttl": ttl
         }
         
         for record in all_records:
-            if record["name"] == subdomain and record["type"] == "A":
+            if record["name"] == str(sub_name) and record["type"] == "A":
                 renew_response = requests.patch(f"{base_url}/{record['id']}", headers=headers, data=json.dumps(record_data))
                 renew_response.raise_for_status()  # 捕获创建请求的错误     
-                print(f"✅ 更新成功：{subdomain}.{domain} → {new_ip}")
-                bulid_vless_urls(subdomain, domain)
+                print(f"✅ 更新成功：{sub_name}.{domain} → {ip}")
+                bulid_vless_urls(sub_name, domain)
                 return
                 
         create_response = requests.post(base_url, headers=headers, data=json.dumps(record_data))
         create_response.raise_for_status()  # 捕获创建请求的错误
-        print(f"✅ 创建成功：{subdomain}.{domain} → {new_ip}")
-        bulid_vless_urls(subdomain, domain)
+        print(f"✅ 创建成功：{sub_name}.{domain} → {ip}")
+        bulid_vless_urls(sub_name, domain)
         
     except requests.exceptions.RequestException as e:
         error_msg = f"❌ {subdomain}.{domain} 操作失败：{str(e)}"
