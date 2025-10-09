@@ -30,7 +30,7 @@ jobs:
         keep_minimum_runs: 6
         
     - name: Run script
-      env:
+      env: |
         DYNU_TOKEN: ${{ secrets.DYNU_TOKEN }}
         QQ_771_URL: ${{ QQ_771_URL }}
         QQ_771_TOKEN: ${{ secrets.QQ_771_TOKEN }}
