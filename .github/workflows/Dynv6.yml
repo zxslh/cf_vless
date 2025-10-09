@@ -34,6 +34,8 @@ jobs:
         
     - name: Run script
       run: python ${{ github.workspace }}/Ddns_A.py
+      env:
+        dynv6_token: ${{ DYNV6_TOKEN }}
         
     - name: Commit and push changes
       run: |
