@@ -11,7 +11,7 @@ def update_dynv6_a_via_api(ip, sub_name):
     base_url = f"https://dynv6.com/api/v2/zones/5071717/records" #cf-zxs.dns.army
     api_token = os.getenv('DYNV6_TOKEN')
     domain = 'cf-zxs.dns.army'
-    
+
     subdomain = str(sub_name)  # 确保子域名为字符串类型
     new_ip = ip
     ttl = 3600
@@ -22,6 +22,9 @@ def update_dynv6_a_via_api(ip, sub_name):
     }
 
     try:
+        if not api_token:
+            print('需要token')
+            raise Exception
         response = requests.get(base_url, headers=headers)
         response.raise_for_status()
         all_records = response.json()
@@ -51,6 +54,7 @@ def update_dynv6_a_via_api(ip, sub_name):
         if hasattr(e, 'response') and e.response:
             error_msg += f"，响应：{e.response.text}"
         print(error_msg)
+        raise Exception
 
 def update_A_cfip():
     urls = [
@@ -73,8 +77,11 @@ def update_A_cfip():
             
     if unique_ips:
         for ip in unique_ips:
-            update_dynv6_a_via_api(ip, i)
-            i += 1
+            try:
+                update_dynv6_a_via_api(ip, i)
+                i += 1
+            except Exception as e:
+                return
             if i > 40:
                 break
 
