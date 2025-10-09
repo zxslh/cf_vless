@@ -6,7 +6,6 @@ import os
 def update_dynv6_a_via_api(ip, sub_name):
     
     base_url = f"https://dynv6.com/api/v2/zones/5071717/records"
-    domain = 'cf-zxs.dns.army'
 
     try:
 
@@ -26,13 +25,12 @@ def update_dynv6_a_via_api(ip, sub_name):
                 renew_response = requests.patch(f"{base_url}/{record['id']}", headers=headers, data=json.dumps(record_data))
                 renew_response.raise_for_status()  # 捕获创建请求的错误     
                 print(f"✅ 更新成功：{sub_name}.{domain} → {ip}")
-                bulid_vless_urls(sub_name, domain)
                 return
                 
         create_response = requests.post(base_url, headers=headers, data=json.dumps(record_data))
         create_response.raise_for_status()  # 捕获创建请求的错误
         print(f"✅ 创建成功：{sub_name}.{domain} → {ip}")
-        bulid_vless_urls(sub_name, domain)
+        
         
     except requests.exceptions.RequestException as e:
         error_msg = f"❌ {sub_name}.{domain} 操作失败：{str(e)}"
@@ -67,6 +65,7 @@ def update_A_cfip():
         for ip in unique_ips:
             try:
                 update_dynv6_a_via_api(ip, i)
+                bulid_vless_urls(i, domain)
                 i += 1
             except Exception as e:
                 break
@@ -84,6 +83,7 @@ def bulid_vless_urls(a, b):
 if __name__ == "__main__":
     vless_urls = []
     api_token = os.getenv('DYNV6_TOKEN')
+    domain = 'cf-zxs.dns.army'
     if not api_token:
         print('需要token')
     else:
