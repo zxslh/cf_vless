@@ -57,9 +57,12 @@ def update_A_cfip():
     j = 0
     
     for url in urls:
-        response = requests.get(url, timeout=10).text
-        ip_matches = re.findall(ip_pattern, response, re.IGNORECASE)
-        unique_ips.update(ip_matches)
+        try:
+            response = requests.get(url, timeout=10).text
+            ip_matches = re.findall(ip_pattern, response, re.IGNORECASE)
+            unique_ips.update(ip_matches)
+        except Exception as e:
+            continue
     ip_list = list(unique_ips)
     if ip_list:
         for record in all_records:
