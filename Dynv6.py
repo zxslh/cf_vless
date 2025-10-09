@@ -3,7 +3,7 @@ import json
 import re
 import os
 
-def update_dynv6_a_via_api(ip, sub_name):
+def update_dynv6_a_via_api(ip, sub_name, domain, zoneID):
 
     base_url = f"https://dynv6.com/api/v2/zones/5071717/records" #cf-zxs.dns.army
     
@@ -86,7 +86,7 @@ def update_A_cfip():
     if unique_ips:
         for ip in unique_ips:
             try:
-                update_dynv6_a_via_api(ip, i)
+                update_dynv6_a_via_api(ip, i, domain, zoneID)
             except Exception as e:
                 break
             i += 1
