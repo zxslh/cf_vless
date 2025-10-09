@@ -83,6 +83,7 @@ def bulid_vless_urls(a, b):
     uuid = os.getenv('LIVE_CFV_TOKEN')
     port = '443'
     host = os.getenv('LIVE_CFV_URL')
+    if not uuid or not host: return
     vless_url = f"vless://{uuid}@{a}.{b}:{port}?path=%2F%3Fed%3D2560&security=tls&encryption=none&host={host}&type=ws&sni={host}#{a}{b[0]}"
     vless_urls.append(vless_url)
 
@@ -92,16 +93,15 @@ if __name__ == "__main__":
     api_token = os.getenv('DYNU_TOKEN')
     if not api_token:
         print('❌ 需要TOKEN')
-        return
-    headers = {
-        "accept": "application/json",
-        "API-Key": api_token
-    } 
-    try:
-        update_A_cfip()
-    except Exception as e:  
-        print(f'❌ 错误：{str(e)}')
-    with open('dynu.txt', 'w', encoding='utf-8') as file:
-        for vless_url in vless_urls:
-            file.write(f'{vless_url}\n')
-        print(f'✅ 写入成功！')
+    else:
+        headers = {
+            "accept": "application/json",
+            "API-Key": api_token
+        } 
+        try:
+            update_A_cfip()
+        except Exception as e:  
+            print(f'❌ 错误：{str(e)}')
+        with open('dynu.txt', 'w', encoding='utf-8') as file:
+            for vless_url in vless_urls:
+                file.write(f'{vless_url}\n')
