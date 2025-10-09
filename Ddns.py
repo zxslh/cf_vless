@@ -12,14 +12,14 @@ update_list = [
 ]
 
 ip_pattern = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
-
+token = os.getenv('DYNV6_TOKEN')
 for list in update_list:
     try:
         response = requests.get(list['url'], timeout=10).text
         ip_matches = re.findall(ip_pattern, response, re.IGNORECASE)
         if ip_matches:
             ipv4 = ip_matches[0]
-            update_url = f"http://dynv6.com/api/update?token={os.getenv('DYNV6_TOKEN')&hostname={list['domain']}&ipv4={ipv4}"
+            update_url = f"http://dynv6.com/api/update?token={token}&hostname={list['domain']}&ipv4={ipv4}"
             response = requests.get(update_url, timeout=10).text.strip()
             print(f"{ipv4}@{response}@{list['domain']}")
         else:
