@@ -84,7 +84,7 @@ def bulid_vless_urls(a, b):
 
 if __name__ == "__main__":
     vless_urls = []
-    api_token = 'bXV3VU6f2bagfYdVdYTU62U5Ud363366'
+    api_token = os.getenv('DYNU_TOKEN')
     headers = {
         "accept": "application/json",
         "API-Key": api_token
