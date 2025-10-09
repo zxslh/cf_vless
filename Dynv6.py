@@ -52,6 +52,8 @@ def update_A_cfip():
             response = requests.get(url, timeout=10).text
             ip_matches = re.findall(ip_pattern, response, re.IGNORECASE)
             unique_ips.update(ip_matches)
+            with open('ip.txt', 'w', encoding='utf-8') as file:
+                file.write(f'{url}\n{ip_matches}\n')
         except Exception as e:
             print(f'❌ 错误：{str(e)}')
             continue
