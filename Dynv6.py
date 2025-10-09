@@ -6,9 +6,7 @@ import os
 def update_dynv6_a_via_api(ip, sub_name):
     
     base_url = f"https://dynv6.com/api/v2/zones/5071717/records"
-
     try:
-
         response = requests.get(base_url, headers=headers)
         response.raise_for_status()
         all_records = response.json()
@@ -65,13 +63,13 @@ def update_A_cfip():
         for ip in unique_ips:
             try:
                 update_dynv6_a_via_api(ip, i)
-                bulid_vless_urls(i, domain)
+                bulid_vless_urls(i)
                 i += 1
             except Exception as e:
                 break
             if i > 40: break
 
-def bulid_vless_urls(a, b):
+def bulid_vless_urls(a):
     global vless_urls
     uuid = os.getenv('QQ_771_TOKEN')
     port = '443'
@@ -79,7 +77,7 @@ def bulid_vless_urls(a, b):
     if not uuid:
         print('❌ 需要UUID')
         return
-    vless_url = f"vless://{uuid}@{a}.{b}:{port}?path=%2F%3Fed%3D2560&security=tls&encryption=none&host={host}&type=ws&sni={host}#{a}{b[0]}"
+    vless_url = f"vless://{uuid}@{a}.{domain}:{port}?path=%2F%3Fed%3D2560&security=tls&encryption=none&host={host}&type=ws&sni={host}#{a}{domain[0]}"
     vless_urls.append(vless_url)
 
 if __name__ == "__main__":
