@@ -7,8 +7,10 @@ def update_dynv6_a_via_api(ip, sub_name):
     api_token = os.getenv('DYNV6_TOKEN')
     domain = 'cf-zxs.dns.army'
     ttl = 3600
+    base_url = f"https://dynv6.com/api/v2/zones/5071717/records" #cf-zxs.dns.army
+    api_token = 'vTTXvP2dGw8dtHjwFRXXjVfWL1rcLU'
+    domain = 'cf-zxs.dns.army'
     
-    base_url = f"https://dynv6.com/api/v2/zones/5071717/records"
     headers = {
         "Authorization": f"Bearer {api_token}",
         "Content-Type": "application/json"
