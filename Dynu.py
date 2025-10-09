@@ -3,7 +3,7 @@ import json
 import re
 import os
 
-def update_dynv6_a_via_api(ip, sub_name, domain, id):
+def update_dynu_A(ip, sub_name, domain, id):
 
     record_data = {
         "nodeName": sub_name,
@@ -66,7 +66,7 @@ def update_A_cfip():
         for record in all_records:
             for ip in ip_list[j:]:
                 try:
-                    update_dynv6_a_via_api(ip, i, record['name'], record['id'])
+                    update_dynu_A(ip, i, record['name'], record['id'])
                     i += 1
                     j += 1
                 except Exception as e:
