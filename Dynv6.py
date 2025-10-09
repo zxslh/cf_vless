@@ -4,33 +4,50 @@ import re
 import os
 
 def update_dynv6_a_via_api(ip, sub_name):
+    
+    base_url = f"https://dynv6.com/api/v2/zones/5071717/records" #cf-zxs.dns.army
+    api_token = os.getenv('DYNV6_TOKEN')
+    domain = 'cf-zxs.dns.army'
+    
+    subdomain = str(sub_name)  # 确保子域名为字符串类型
+    new_ip = ip
+    ttl = 3600
+
+    headers = {
+        "Authorization": f"Bearer {api_token}",
+        "Content-Type": "application/json"
+    }
 
     try:
         response = requests.get(base_url, headers=headers)
         response.raise_for_status()
         all_records = response.json()
-        print('✅ 获取记录成功')
-
+        
         record_data = {
-            "name": sub_name,
+            "name": subdomain,
             "type": "A",
-            "data": ip,
+            "data": new_ip,
             "ttl": ttl
         }
         
         for record in all_records:
-            if record["name"] == sub_name and record["type"] == "A":
+            if record["name"] == subdomain and record["type"] == "A":
                 renew_response = requests.patch(f"{base_url}/{record['id']}", headers=headers, data=json.dumps(record_data))
                 renew_response.raise_for_status()  # 捕获创建请求的错误     
-                print(f"✅ 更新成功：{sub_name}.{domain} → {ip}")
+                print(f"✅ 更新成功：{subdomain}.{domain} → {new_ip}")
+                bulid_vless_urls(subdomain, domain)
                 return
                 
         create_response = requests.post(base_url, headers=headers, data=json.dumps(record_data))
         create_response.raise_for_status()  # 捕获创建请求的错误
-        print(f"✅ 创建成功：{sub_name}.{domain} → {ip}")
-       
-    except Exception as e:
-        raise e
+        print(f"✅ 创建成功：{subdomain}.{domain} → {new_ip}")
+        bulid_vless_urls(subdomain, domain)
+        
+    except requests.exceptions.RequestException as e:
+        error_msg = f"❌ {subdomain}.{domain} 操作失败：{str(e)}"
+        if hasattr(e, 'response') and e.response:
+            error_msg += f"，响应：{e.response.text}"
+        print(error_msg)
 
 def update_A_cfip():
     urls = [
@@ -47,63 +64,30 @@ def update_A_cfip():
     i = 11  # 子域名起始编号（如10、11、12...）
     
     for url in urls:
-        try:
-            response = requests.get(url, timeout=10).text
-            ip_matches = re.findall(ip_pattern, response, re.IGNORECASE)
-            unique_ips.update(ip_matches)
-        except Exception as e:
-            print(f'❌ 失败3：{str(e)}')
-            continue
+        response = requests.get(url, timeout=10).text
+        ip_matches = re.findall(ip_pattern, response, re.IGNORECASE)
+        unique_ips.update(ip_matches)
             
-    if not unique_ips:
-        print('❌ 获取CFIP失败')
-        return
-    else:
-        print('✅ 获取CFIP成功')
-        
-    for ip in unique_ips:
-        try:
+    if unique_ips:
+        for ip in unique_ips:
             update_dynv6_a_via_api(ip, i)
-            bulid_vless_urls(i)
             i += 1
-        except Exception as e:
-            print(f'❌ 失败2：{str(e)}')
-            break
-        if i > 40: break
+            if i > 40:
+                break
 
-def bulid_vless_urls(a):
+def bulid_vless_urls(a, b):
     global vless_urls
-    uuid = os.getenv('QQ_771_TOKEN')
-    port = '443'
-    host = '771.qq-zxs.dns.army'
-    if not uuid:
-        print('❌ 需要UUID')
-        return
-    vless_url = f"vless://{uuid}@{a}.{domain}:{port}?path=%2F%3Fed%3D2560&security=tls&encryption=none&host={host}&type=ws&sni={host}#{a}{domain[0]}"
+    vless_url = f"vless://e3713ba4-a8fc-44ec-b401-3b736e67718d@{a}.{b}:443?path=%2F%3Fed%3D2560&security=tls&encryption=none&host=002.ljk-clouflare.dns.army&type=ws&sni=002.ljk-clouflare.dns.army#{a}"
     vless_urls.append(vless_url)
 
 if __name__ == "__main__":
     vless_urls = []
-    api_token = os.getenv('DYNV6_TOKEN')
-    domain = 'cf-zxs.dns.army'
-    base_url = f"https://dynv6.com/api/v2/zones/5071717/records"
-    ttl = 3600
-    headers = {
-        "Authorization": f"Bearer {api_token}",
-        "Content-Type": "application/json"
-    }
-    if not api_token:
-        print('❌ 需要TOKEN')
-    else:
-        try:
-            update_A_cfip()
-        except Exception as e:
-            print(f'❌ 失败1：{str(e)}')
-        try:
-            with open('index.html', 'w', encoding='utf-8') as file:
-                for vless_url in vless_urls:
-                    file.write(f'{vless_url}\n')
+    update_A_cfip()
+    try:
+        with open('index.html', 'w', encoding='utf-8') as file:
+            for vless_url in vless_urls:
+                file.write(f'{vless_url}\n')
             print(f'✅ 写入成功！')
-        except Exception as e:
-            print(f'❌ 写入失败：{str(e)}')
+    except Exception as e:
+        print(f'❌ 写入失败：{str(e)}')
 
