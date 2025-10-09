@@ -94,7 +94,10 @@ if __name__ == "__main__":
             "Authorization": f"Bearer {api_token}",
             "Content-Type": "application/json"
         }
-        update_A_cfip()
+        try:
+            update_A_cfip()
+        except Exception as e:
+            print(f'❌ 失败1：{str(e)}')
         try:
             with open('index.html', 'w', encoding='utf-8') as file:
                 for vless_url in vless_urls:
