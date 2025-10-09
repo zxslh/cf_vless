@@ -13,7 +13,7 @@ def update_dynv6_a_via_api(ip, sub_name):
         print('✅ 获取记录成功')
     except Exception as e:
         print(f'❌ 获取记录失败：{str(e)}')
-        raise Exception as e
+        raise e
          
      try: 
         record_data = {
@@ -39,7 +39,7 @@ def update_dynv6_a_via_api(ip, sub_name):
         if hasattr(e, 'response') and e.response:
             error_msg += f"，响应：{e.response.text}"
         print(error_msg)
-        raise Exception as e
+        raise e
 
 def update_A_cfip():
     urls = [
