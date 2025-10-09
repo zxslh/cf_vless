@@ -69,9 +69,8 @@ def update_A_cfip():
                 update_dynv6_a_via_api(ip, i)
                 i += 1
             except Exception as e:
-                return
-            if i > 40:
                 break
+            if i > 40: break
 
 def bulid_vless_urls(a, b):
     global vless_urls
