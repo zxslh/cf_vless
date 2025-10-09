@@ -36,8 +36,8 @@ jobs:
       env:
         DYNV6_TOKEN: ${{ secrets.DYNV6_TOKEN }}
       run:
-        echo '$DYNV6_TOKEN'
-        python ${{ github.workspace }}/Dynv6.py
+        echo $DYNV6_TOKEN
+        #python ${{ github.workspace }}/Dynv6.py
         
     - name: Commit and push changes
       run: |
