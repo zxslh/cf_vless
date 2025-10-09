@@ -44,7 +44,6 @@ def update_A_cfip():
     ]
     
     unique_ips = set()
-    all_ips = []
     ip_pattern = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
     
     for url in urls:
@@ -52,7 +51,6 @@ def update_A_cfip():
             response = requests.get(url, timeout=10).text
             ip_matches = re.findall(ip_pattern, response, re.IGNORECASE)
             unique_ips.update(ip_matches)
-            all_ips.append(f'{url}：{len(ip_matches)}\n{ip_matches}\n')
         except Exception as e:
             print(f'❌ 错误：{str(e)}')
             continue
@@ -60,12 +58,7 @@ def update_A_cfip():
     if not unique_ips:
         print('❌ 错误：获取CFIP失败')
         return
-        
-    with open('ip.txt', 'w', encoding='utf-8') as file:
-        for ips in all_ips:
-            file.write(ips)
-        file.write(f'\n去重后IP个数：{len(unique_ips)}\n{unique_ips}')
-        
+             
     try:
         response = requests.get(base_url, headers=headers)
         response.raise_for_status()
@@ -80,14 +73,18 @@ def update_A_cfip():
         return
         
     i = 11
+    ip_in_use = set()
     for ip in unique_ips:
         try:
             update_dynv6_a_via_api(ip, str(i), domain, zoneID)
+            ip_in_use.add(ip)
         except Exception as e:
             break
         bulid_vless_urls(str(i), domain)
         i += 1
         if i > 40: break
+    with open('ip_dynv6_using.txt', 'w', encoding='utf-8') as file:
+        file.write(ip_in_use)       
 
 def bulid_vless_urls(a, b):
     global vless_urls
