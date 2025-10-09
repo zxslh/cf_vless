@@ -45,6 +45,7 @@ def update_dynv6_a_via_api(ip, sub_name):
         if hasattr(e, 'response') and e.response:
             error_msg += f"，响应：{e.response.text}"
         print(error_msg)
+        raise
 
 def update_A_cfip():
     urls = [
@@ -67,10 +68,12 @@ def update_A_cfip():
             
     if unique_ips:
         for ip in unique_ips:
-            update_dynv6_a_via_api(ip, i)
-            i += 1
-            if i > 40:
+            try:
+                update_dynv6_a_via_api(ip, i)
+                i += 1
+            except Exception as e:
                 break
+            if i > 40: break
 
 def bulid_vless_urls(a, b):
     global vless_urls
