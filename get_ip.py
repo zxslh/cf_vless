@@ -25,8 +25,7 @@ for url in urls:
             
 if not unique_ips:
     print('❌ 错误：获取CFIP失败')
-    
-        
-with open('ip.txt', 'w', encoding='utf-8') as file:
-    file.write(unique_ips)
+else:
+    with open('ip.txt', 'w', encoding='utf-8') as file:
+        file.write(unique_ips)
         
