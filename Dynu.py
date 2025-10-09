@@ -53,8 +53,6 @@ def update_A_cfip():
     ]
     unique_ips = set()
     ip_pattern = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
-    i = 11  # 子域名起始编号（如10、11、12...）
-    j = 0
     
     for url in urls:
         try:
@@ -64,11 +62,15 @@ def update_A_cfip():
         except Exception as e:
             continue
     ip_list = list(unique_ips)
+    ip_dynu_using = set()
+    i = 11
+    j = 0
     if ip_list:
         for record in all_records:
             for ip in ip_list[j:]:
                 try:
                     update_dynu_A(ip, i, record['name'], record['id'])
+                    ip_dynu_using.add(ip)
                     bulid_vless_urls(i, record['name'])
                     i += 1
                     j += 1
@@ -77,7 +79,9 @@ def update_A_cfip():
                     break
                 if j > 30: return
             i = 11
-            continue                
+            continue
+    with open('ip_dynu_using.txt', 'w', encoding='utf-8') as file:
+        file.write(str(ip_dynu_using))
             
 def bulid_vless_urls(a, b):
     global vless_urls
