@@ -76,7 +76,9 @@ def bulid_vless_urls(a, b):
     uuid = os.getenv('QQ_771_TOKEN')
     port = '443'
     host = '771.qq-zxs.dns.army'
-    if not uuid: return
+    if not uuid:
+        print('❌ 需要UUID')
+        return
     vless_url = f"vless://{uuid}@{a}.{b}:{port}?path=%2F%3Fed%3D2560&security=tls&encryption=none&host={host}&type=ws&sni={host}#{a}{b[0]}"
     vless_urls.append(vless_url)
 
@@ -85,7 +87,7 @@ if __name__ == "__main__":
     api_token = os.getenv('DYNV6_TOKEN')
     domain = 'cf-zxs.dns.army'
     if not api_token:
-        print('需要token')
+        print('❌ 需要TOKEN')
     else:
         headers = {
             "Authorization": f"Bearer {api_token}",
