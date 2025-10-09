@@ -7,6 +7,9 @@ def update_dynv6_a_via_api(ip, sub_name):
     
     base_url = f"https://dynv6.com/api/v2/zones/5071717/records" #cf-zxs.dns.army
     api_token = os.getenv('DYNV6_TOKEN')
+    if not api_token:
+        print('❌ 需要TOKEN')
+        raise
     domain = 'cf-zxs.dns.army'
     ttl = 3600
 
