@@ -83,7 +83,7 @@ def bulid_vless_urls(a, b):
     if not uuid:
         print('❌ 需要UUID')
         return
-    vless_url = f"vless://{uuid}@{a}.{domain}:{port}?path=%2F%3Fed%3D2560&security=tls&encryption=none&host={host}&type=ws&sni={host}#{a}{domain[0]}"
+    vless_url = f"vless://{uuid}@{a}.{b}:{port}?path=%2F%3Fed%3D2560&security=tls&encryption=none&host={host}&type=ws&sni={host}#{a}{b[0]}"
     vless_urls.append(vless_url)
 
 if __name__ == "__main__":
