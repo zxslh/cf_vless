@@ -8,11 +8,6 @@ def update_dynv6_a_via_api(ip, sub_name):
     base_url = f"https://dynv6.com/api/v2/zones/5071717/records"
     domain = 'cf-zxs.dns.army'
 
-    headers = {
-        "Authorization": f"Bearer {api_token}",
-        "Content-Type": "application/json"
-    }
-
     try:
         if not api_token:
             print('需要token')
@@ -86,6 +81,10 @@ if __name__ == "__main__":
     vless_urls = []
     api_token = os.getenv('DYNV6_TOKEN')
     ttl = 3600
+    headers = {
+        "Authorization": f"Bearer {api_token}",
+        "Content-Type": "application/json"
+    }
     update_A_cfip()
     try:
         with open('index.html', 'w', encoding='utf-8') as file:
