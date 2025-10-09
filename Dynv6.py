@@ -6,20 +6,14 @@ import os
 def update_dynv6_a_via_api(ip, sub_name):
 
     base_url = f"https://dynv6.com/api/v2/zones/5071717/records" #cf-zxs.dns.army
-    api_token = os.getenv('DYNV6_TOKEN')
-    if not api_token:
-        print('❌ 需要TOKEN')
-        return
+    
     domain = 'cf-zxs.dns.army'
     
     subdomain = str(sub_name)  # 确保子域名为字符串类型
     new_ip = ip
     ttl = 3600
 
-    headers = {
-        "Authorization": f"Bearer {api_token}",
-        "Content-Type": "application/json"
-    }
+
 
     try:
         response = requests.get(base_url, headers=headers)
@@ -63,6 +57,19 @@ def update_A_cfip():
         'https://addressesapi.090227.xyz/CloudFlareYes',
         'https://vps789.com/openApi/cfIpApi'
     ]
+    domain = 'cf-zxs.dns.army'
+    base_url = "https://dynv6.com/api/v2/zones"
+    try:
+        response = requests.get(base_url, headers=headers)
+        response.raise_for_status()
+        all_records = response.json()
+        for record in all_records:
+            if domain == record['name']:
+                zoneID = record['id']
+                break
+        if not zoneID: return
+    except Exception as e:
+        return
     unique_ips = set()
     ip_pattern = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
     i = 11  # 子域名起始编号（如10、11、12...）
@@ -100,6 +107,11 @@ def bulid_vless_urls(a, b):
 
 if __name__ == "__main__":
     vless_urls = []
+    api_token = os.getenv('DYNV6_TOKEN')
+    headers = {
+        "Authorization": f"Bearer {api_token}",
+        "Content-Type": "application/json"
+    }
     update_A_cfip()
     try:
         with open('index.html', 'w', encoding='utf-8') as file:
