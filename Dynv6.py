@@ -81,18 +81,18 @@ def update_A_cfip():
         return
         
     i = 11
-    ip_in_use = set()
+    ip_in_use = []
     for ip in unique_ips:
         try:
             update_dynv6_a_via_api(ip, str(i), domain, zoneID)
-            ip_in_use.add(ip)
+            ip_in_use.append(ip)
         except Exception as e:
             break
         bulid_vless_urls(str(i), domain)
         i += 1
         if i > 40: break
     with open('ip_dynv6_using.txt', 'w', encoding='utf-8') as file:
-        json.dump(list(ip_in_use), file, ensure_ascii=False, indent=2)
+        json.dump(ip_in_use, file, ensure_ascii=False, indent=2)
 
 def bulid_vless_urls(a, b):
     global vless_urls
