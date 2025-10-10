@@ -81,7 +81,7 @@ def update_A_cfip():
             i = 11
             continue
     with open('ip_dynu_using.txt', 'w', encoding='utf-8') as file:
-        file.write(str(ip_dynu_using))
+        json.dump(list(ip_dynu_using), file, ensure_ascii=False, indent=2)
             
 def bulid_vless_urls(a, b):
     global vless_urls
