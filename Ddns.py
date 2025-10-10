@@ -4,8 +4,7 @@ import re
 import os
 
 def update_dynv6_A(zone):
-    #基础变量
-    api_token = os.getenv('DYNV6_TOKEN')
+    #基础变量，api_token使用全局变量
     base_url = "https://dynv6.com/api/v2/zones"
     domain = zone
     headers = {
@@ -28,9 +27,10 @@ def update_dynv6_A(zone):
     #形成url
     url = f"{base_url}/{zoneID}/records"
     sub_name = 11
-    while sub_name < 40:
+    while sub_name < 38:
         try:
             current_ip = unique_ips.pop()
+            if not current_ip: return
             record_data = {
                 "name": str(sub_name),
                 "type": "A",
@@ -59,12 +59,11 @@ def update_dynv6_A(zone):
                 sub_name += 1  # 创建成功后，sub_name递增
         except Exception as e:
             print(f"❌ {sub_name}.{domain} 操作失败：{str(e)}")
-            return  # 抛出异常，终止程序（若需继续执行，可替换为continue，但需注意IP已被pop）
+            continue
 
 def update_dynu_A():
     #DYNU免费用户限制4个domain，每个domain限制4个A记录
     api_token = os.getenv('DYNU_TOKEN')
-    api_token = 'f4YXU34YYba3WW33gX43bgUfX2gTZdf6'
     base_url = f"https://api.dynu.com/v2/dns"
     headers = {
         "accept": "application/json",
@@ -91,6 +90,7 @@ def update_dynu_A():
             return
         while sub_name < 15:
             current_ip = unique_ips.pop()
+            if not current_ip: return
             record_data = {
                 "nodeName": str(sub_name),
                 "recordType": "A",
@@ -146,7 +146,7 @@ if __name__ == "__main__":
                 ipv4 = ip_matches[0]
                 update_url = f"http://dynv6.com/api/update?token={api_token}&hostname={list['domain']}&ipv4={ipv4}"
                 response = requests.get(update_url, timeout=10).text.strip()
-                print(f"{ipv4}@{response}@{list['domain']}")
+                print(f"✅ {ipv4}@{response}@{list['domain']}")
                 bulid_vless_urls(list['domain'].split(".", 1)[0], list['domain'].split(".", 1)[1], '771.qq', 'QQ_771_TOKEN')
             else:
                 print(f"❌ {list['url']}未返回IP")
