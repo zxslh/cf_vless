@@ -44,18 +44,15 @@ def update_dynv6_A(zone):
             record_found = False
             for record in all_records:
                 if record["name"] == str(sub_name) and record["type"] == "A":
-                    # 找到匹配记录，执行更新
                     renew_response = requests.patch(f"{url}/{record['id']}", headers=headers, data=json.dumps(record_data))
                     renew_response.raise_for_status()
-                    print(f"✅ 更新成功：{sub_name}.{domain} → {current_ip}")
-                    bulid_vless_urls(str(sub_name), domain, '771.qq', 'QQ_771_TOKEN')
                     record_found = True  # 标记已找到并更新
                     break  # 找到匹配记录，退出循环，无需继续遍历
             if not record_found:
                 create_response = requests.post(url, headers=headers, data=json.dumps(record_data))
                 create_response.raise_for_status()
-                print(f"✅ 创建成功：{sub_name}.{domain} → {current_ip}")
-                bulid_vless_urls(str(sub_name), domain, '002.ljk', 'LJK_E37_TOKEN')
+            print(f"✅ 成功：{sub_name}.{domain} → {current_ip}")
+            bulid_vless_urls(str(sub_name), domain, '002.ljk', 'LJK_E37_TOKEN')
         except Exception as e:
             print(f"❌ {sub_name}.{domain} 操作失败：{str(e)}")
         finally:
