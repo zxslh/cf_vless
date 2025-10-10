@@ -101,6 +101,6 @@ if __name__ == "__main__":
         update_dynv6_A('cf-zxs.v6.rocks')
 
     if vless_urls:
-        with open('docs/index.html', 'w', encoding='utf-8') as file:
+        with open('index.html', 'w', encoding='utf-8') as file:
             file.write(vless_urls)
             print(f'✅ 写入index成功！')
