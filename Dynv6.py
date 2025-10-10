@@ -89,7 +89,7 @@ def update_A_cfip():
         i += 1
         if i > 40: break
     with open('ip_dynv6_using.txt', 'w', encoding='utf-8') as file:
-        json.dump(ip_in_use, file, ensure_ascii=False, indent=2)
+        json.dump(list(ip_in_use), file, ensure_ascii=False, indent=2)
 
 def bulid_vless_urls(a, b):
     global vless_urls
