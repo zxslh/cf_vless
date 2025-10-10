@@ -49,6 +49,7 @@ def update_A_cfip():
             unique_ips.update(json.load(file))
         with open('ip_dynu_using.txt', 'r', encoding='utf-8') as file:
             unique_ips.update(json.load(file))
+        print('✅使用ip.txt文件')
     except Exception as e:
         ip_pattern = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
         for url in urls:
