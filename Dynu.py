@@ -55,7 +55,7 @@ def update_A_cfip():
     try:
         with open('ip.txt', 'r', encoding='utf-8') as file:
             unique_ips.update(json.load(file))
-        with open('ip_dynu_using.txt', 'r', encoding='utf-8') as file:
+        with open('ip_dynv6_using.txt', 'r', encoding='utf-8') as file:
             unique_ips.update(json.load(file))
         print('✅ 使用ip.txt文件')
     except Exception as e:
