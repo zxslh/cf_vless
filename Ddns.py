@@ -135,7 +135,7 @@ if __name__ == "__main__":
     ]
     unique_ips = set()
     ip_pattern = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
-    DYNV6_token = os.getenv('DYNV6_TOKEN')
+    api_token = os.getenv('DYNV6_TOKEN')
 
     for list in update_list:
         try:
@@ -144,9 +144,9 @@ if __name__ == "__main__":
             if ip_matches:
                 unique_ips.update(ip_matches[1:])
                 ipv4 = ip_matches[0]
-                update_url = f"http://dynv6.com/api/update?token={DYNV6_token}&hostname={list['domain']}&ipv4={ipv4}"
-                #response = requests.get(update_url, timeout=10).text.strip()
-                #print(f"{ipv4}@{response}@{list['domain']}")
+                update_url = f"http://dynv6.com/api/update?token={api_token}&hostname={list['domain']}&ipv4={ipv4}"
+                response = requests.get(update_url, timeout=10).text.strip()
+                print(f"{ipv4}@{response}@{list['domain']}")
                 bulid_vless_urls(list['domain'].split(".", 1)[0], list['domain'].split(".", 1)[1], '771.qq', 'QQ_771_TOKEN')
             else:
                 print(f"❌ {list['url']}未返回IP")
