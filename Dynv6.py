@@ -64,8 +64,6 @@ def update_dynv6_A(zone):
             
 def bulid_vless_urls(a, b, c, d):
     global vless_urls
-    global vless_urls_771
-    global vless_urls_crv
     ports = ['443','2053','2083','2087','2096','8443']
     uuid = os.getenv(d)
     if not uuid: return
@@ -74,42 +72,29 @@ def bulid_vless_urls(a, b, c, d):
     if not uuid: return
     vless_url = f"vless://{uuid}@{a}.{b}:{port}?path=%2F%3Fed%3D2560&security=tls&encryption=none&host={host}&type=ws&sni={host}#{c[0:3]}-{b[0]}-{a}"
     vless_urls += f'{vless_url}\n'
-    if c == '771.qq':
-        vless_urls_771 += f'{vless_url}\n'
-    if c == 'cfv.live':
-        vless_urls_crv += f'{vless_url}\n'
             
 if __name__ == "__main__":
     vless_urls = ''
 
-    update_list = [
-        {'domain': 'cf-zxs.dynv6.net', 'url': 'https://ip.164746.xyz'},
-        {'domain': 'cf-zxs.v6.army', 'url': 'https://ipdb.api.030101.xyz/?type=bestcf&country=true'},
-        {'domain': 'cf-zxs.dns.army', 'url': 'https://ip.164746.xyz/ipTop10.html'},
-        {'domain': 'cf-zxs.dns.navy', 'url': 'https://www.wetest.vip/page/cloudflare/total_v4.html'},
-        {'domain': 'cf-zxs.v6.navy', 'url': 'https://api.uouin.com/cloudflare.html'},
-        {'domain': 'ljk-clouflare.dns.army', 'url': 'https://addressesapi.090227.xyz/CloudFlareYes'},
-        {'domain': 'live-zxs.dns.army', 'url': 'https://vps789.com/openApi/cfIpApi'}
+    urls = [
+        'https://ip.164746.xyz',
+        'https://ipdb.api.030101.xyz/?type=bestcf&country=true',
+        'https://ip.164746.xyz/ipTop10.html',
+        'https://www.wetest.vip/page/cloudflare/total_v4.html',
+        'https://api.uouin.com/cloudflare.html',
+        'https://addressesapi.090227.xyz/CloudFlareYes',
+        'https://vps789.com/openApi/cfIpApi'
     ]
     unique_ips = set()
     ip_pattern = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
     api_token = os.getenv('DYNV6_TOKEN')
 
-    for list in update_list:
+    for url in urls:
         try:
-            response = requests.get(list['url'], timeout=10).text
+            response = requests.get(url, timeout=10).text
             ip_matches = re.findall(ip_pattern, response, re.IGNORECASE)
-            if ip_matches:
-                unique_ips.update(ip_matches[1:])
-                ipv4 = ip_matches[0]
-                update_url = f"http://dynv6.com/api/update?token={api_token}&hostname={list['domain']}&ipv4={ipv4}"
-                response = requests.get(update_url, timeout=10).text.strip()
-                print(f"✅ {ipv4}@{response}@{list['domain']}")
-                bulid_vless_urls(list['domain'].split(".", 1)[0], list['domain'].split(".", 1)[1], '771.qq', 'QQ_771_TOKEN')
-            else:
-                print(f"❌ {list['url']}未返回IP")
+            unique_ips.update(ip_matches)
         except Exception as e:
-            print(f"❌ 失败: {e}")
             continue
 
     if unique_ips:
