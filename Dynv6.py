@@ -2,71 +2,17 @@ import requests
 import json
 import re
 import os
+import random
 
-def update_dynv6_a_via_api(ip, sub_name, domain, zoneID):
-
-    url = f"{base_url}/{zoneID}/records"
-    record_data = {
-        "name": str(sub_name),
-        "type": "A",
-        "data": ip,
-        "ttl": 3600
+def update_dynv6_A(zone):
+    #基础变量，api_token使用全局变量
+    base_url = "https://dynv6.com/api/v2/zones"
+    domain = zone
+    headers = {
+       "Authorization": f"Bearer {api_token}",
+       "Content-Type": "application/json"
     }
-    
-    try:
-        response = requests.get(base_url, headers=headers)
-        response.raise_for_status()
-        all_records = response.json()
-        
-        for record in all_records:
-            if record["name"] == str(sub_name) and record["type"] == "A":
-                renew_response = requests.patch(f"{url}/{record['id']}", headers=headers, data=json.dumps(record_data))
-                renew_response.raise_for_status()  # 捕获创建请求的错误     
-                print(f"✅ 更新成功：{sub_name}.{domain} → {ip}")
-                return
-                
-        create_response = requests.post(url, headers=headers, data=json.dumps(record_data))
-        create_response.raise_for_status()  # 捕获创建请求的错误
-        print(f"✅ 创建成功：{sub_name}.{domain} → {ip}")
-    except Exception as e:
-        print(f"❌ {sub_name}.{domain} 操作失败：{str(e)}")
-        raise
-
-def update_A_cfip():
-    urls = [
-        'https://ip.164746.xyz',
-        'https://ipdb.api.030101.xyz/?type=bestcf&country=true',
-        'https://ip.164746.xyz/ipTop10.html',
-        'https://www.wetest.vip/page/cloudflare/total_v4.html',
-        'https://api.uouin.com/cloudflare.html',
-        'https://addressesapi.090227.xyz/CloudFlareYes',
-        'https://vps789.com/openApi/cfIpApi'
-    ]
-    
-    unique_ips = set()
-    try:
-        with open('ip.txt', 'r', encoding='utf-8') as file:
-            unique_ips.update(json.load(file))
-        with open('ip_dynu_using.txt', 'r', encoding='utf-8') as file:
-            unique_ips.update(json.load(file))
-        print('✅ 使用ip.txt文件')
-    except Exception as e:
-        print(f'❌ 获取ip.txt文件内容失败：{str(e)}')
-        print('✅ 使用网址获取ip')
-        ip_pattern = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
-        for url in urls:
-            try:
-                response = requests.get(url, timeout=10).text
-                ip_matches = re.findall(ip_pattern, response, re.IGNORECASE)
-                unique_ips.update(ip_matches)
-            except Exception as e:
-                print(f'❌ 错误：{str(e)}')
-                continue
-            
-    if not unique_ips:
-        print('❌ 错误：获取CFIP失败')
-        return
-             
+    #获取zoneID
     try:
         response = requests.get(base_url, headers=headers)
         response.raise_for_status()
@@ -79,48 +25,97 @@ def update_A_cfip():
     except Exception as e:
         print(f'❌ 获取区域信息失败：{str(e)}')
         return
-        
-    i = 11
-    ip_in_use = []
-    for ip in unique_ips:
+    #形成url
+    url = f"{base_url}/{zoneID}/records"
+    sub_name = 11
+    while sub_name < 38:
         try:
-            update_dynv6_a_via_api(ip, str(i), domain, zoneID)
-            ip_in_use.append(ip)
+            current_ip = unique_ips.pop()
+            if not current_ip: return
+            record_data = {
+                "name": str(sub_name),
+                "type": "A",
+                "data": current_ip,  # 用变量暂存IP，方便后续引用
+                "ttl": 3600
+            }
+            response = requests.get(url, headers=headers)
+            response.raise_for_status()
+            all_records = response.json()
+            record_found = False
+            for record in all_records:
+                if record["name"] == str(sub_name) and record["type"] == "A":
+                    # 找到匹配记录，执行更新
+                    renew_response = requests.patch(f"{url}/{record['id']}", headers=headers, data=json.dumps(record_data))
+                    renew_response.raise_for_status()
+                    print(f"✅ 更新成功：{sub_name}.{domain} → {current_ip}")
+                    bulid_vless_urls(str(sub_name), domain, '771.qq', 'QQ_771_TOKEN')
+                    sub_name += 1
+                    record_found = True  # 标记已找到并更新
+                    break  # 找到匹配记录，退出循环，无需继续遍历
+            if not record_found:
+                create_response = requests.post(url, headers=headers, data=json.dumps(record_data))
+                create_response.raise_for_status()
+                print(f"✅ 创建成功：{sub_name}.{domain} → {current_ip}")
+                bulid_vless_urls(str(sub_name), domain, '002.ljk', 'LJK_E37_TOKEN')
+                sub_name += 1  # 创建成功后，sub_name递增
         except Exception as e:
-            break
-        bulid_vless_urls(str(i), domain)
-        i += 1
-        if i > 40: break
-    with open('ip_dynv6_using.txt', 'w', encoding='utf-8') as file:
-        json.dump(ip_in_use, file, ensure_ascii=False, indent=2)
-
-def bulid_vless_urls(a, b):
+            print(f"❌ {sub_name}.{domain} 操作失败：{str(e)}")
+            continue
+            
+def bulid_vless_urls(a, b, c, d):
     global vless_urls
-    uuid = os.getenv('QQ_771_TOKEN')
-    port = '443'
-    host = '771.qq-zxs.dns.army'
-    if not uuid:
-        print('❌ 需要UUID')
-        return
-    vless_url = f"vless://{uuid}@{a}.{b}:{port}?path=%2F%3Fed%3D2560&security=tls&encryption=none&host={host}&type=ws&sni={host}#{a}{b[0]}"
-    vless_urls.append(vless_url)
-
+    global vless_urls_771
+    global vless_urls_crv
+    ports = ['443','2053','2083','2087','2096','8443']
+    uuid = os.getenv(d)
+    if not uuid: return
+    port = random.choice(ports)
+    host = f'{c}-clouflare.dns.army'
+    if not uuid: return
+    vless_url = f"vless://{uuid}@{a}.{b}:{port}?path=%2F%3Fed%3D2560&security=tls&encryption=none&host={host}&type=ws&sni={host}#{c[0:3]}-{b[0]}-{a}"
+    vless_urls += f'{vless_url}\n'
+    if c == '771.qq':
+        vless_urls_771 += f'{vless_url}\n'
+    if c == 'cfv.live':
+        vless_urls_crv += f'{vless_url}\n'
+            
 if __name__ == "__main__":
-    vless_urls = []
+    vless_urls = ''
+
+    update_list = [
+        {'domain': 'cf-zxs.dynv6.net', 'url': 'https://ip.164746.xyz'},
+        {'domain': 'cf-zxs.v6.army', 'url': 'https://ipdb.api.030101.xyz/?type=bestcf&country=true'},
+        {'domain': 'cf-zxs.dns.army', 'url': 'https://ip.164746.xyz/ipTop10.html'},
+        {'domain': 'cf-zxs.dns.navy', 'url': 'https://www.wetest.vip/page/cloudflare/total_v4.html'},
+        {'domain': 'cf-zxs.v6.navy', 'url': 'https://api.uouin.com/cloudflare.html'},
+        {'domain': 'ljk-clouflare.dns.army', 'url': 'https://addressesapi.090227.xyz/CloudFlareYes'},
+        {'domain': 'live-zxs.dns.army', 'url': 'https://vps789.com/openApi/cfIpApi'}
+    ]
+    unique_ips = set()
+    ip_pattern = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
     api_token = os.getenv('DYNV6_TOKEN')
-    domain = 'cf-zxs.dns.army'
-    base_url = "https://dynv6.com/api/v2/zones"
-    if not api_token:
-        print('❌ 需要TOKEN')
-    else:
-        headers = {
-            "Authorization": f"Bearer {api_token}",
-            "Content-Type": "application/json"
-        }
-        update_A_cfip()
-        with open('index.html', 'w', encoding='utf-8') as file:
-            for vless_url in vless_urls:
-                file.write(f'{vless_url}\n')
-            print(f'✅ 写入成功！')
 
+    for list in update_list:
+        try:
+            response = requests.get(list['url'], timeout=10).text
+            ip_matches = re.findall(ip_pattern, response, re.IGNORECASE)
+            if ip_matches:
+                unique_ips.update(ip_matches[1:])
+                ipv4 = ip_matches[0]
+                update_url = f"http://dynv6.com/api/update?token={api_token}&hostname={list['domain']}&ipv4={ipv4}"
+                response = requests.get(update_url, timeout=10).text.strip()
+                print(f"✅ {ipv4}@{response}@{list['domain']}")
+                bulid_vless_urls(list['domain'].split(".", 1)[0], list['domain'].split(".", 1)[1], '771.qq', 'QQ_771_TOKEN')
+            else:
+                print(f"❌ {list['url']}未返回IP")
+        except Exception as e:
+            print(f"❌ 失败: {e}")
+            continue
 
+    if unique_ips:
+        update_dynv6_A('cf-zxs.v6.rocks')
+
+    if vless_urls:
+        with open('docs/index.html', 'w', encoding='utf-8') as file:
+            file.write(vless_urls)
+            print(f'✅ 写入index成功！')
