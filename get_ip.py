@@ -29,6 +29,6 @@ if not unique_ips:
     print('❌ 错误：获取CFIP失败')
 else:
     with open('ip.txt', 'w', encoding='utf-8') as file:
-        json.dump(unique_ips, file, ensure_ascii=False, indent=2)
+        json.dump(list(unique_ips), file, ensure_ascii=False, indent=2)
 
         
