@@ -71,7 +71,7 @@ def update_A_cfip():
             except Exception as e:
                 continue
     ip_list = list(unique_ips)
-    ip_dynu_using = set()
+    ip_dynu_using = []
     i = 11
     j = 0
     if ip_list:
@@ -79,7 +79,7 @@ def update_A_cfip():
             for ip in ip_list[j:]:
                 try:
                     update_dynu_A(ip, i, record['name'], record['id'])
-                    ip_dynu_using.add(ip)
+                    ip_dynu_using.append(ip)
                     bulid_vless_urls(i, record['name'])
                     i += 1
                     j += 1
@@ -90,7 +90,7 @@ def update_A_cfip():
             i = 11
             continue
     with open('ip_dynu_using.txt', 'w', encoding='utf-8') as file:
-        json.dump(list(ip_dynu_using), file, ensure_ascii=False, indent=2)
+        json.dump(ip_dynu_using, file, ensure_ascii=False, indent=2)
             
 def bulid_vless_urls(a, b):
     global vless_urls
