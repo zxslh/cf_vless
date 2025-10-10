@@ -1,8 +1,8 @@
-name: update Dynv6&Dynu A
+name: update Dynv6 A
 
 on:
-  #schedule:
-    #- cron: '0 */3 * * *' # 每3小时运行一次
+  schedule:
+    - cron: '0 */3 * * *' # 每3小时运行一次
   workflow_dispatch: # 允许手动触发
 
 jobs:
@@ -37,7 +37,7 @@ jobs:
         DYNU_TOKEN: ${{ secrets.DYNU_TOKEN }}
         LIVE_CFV_TOKEN: ${{ secrets.LIVE_CFV_TOKEN }}
       run: |
-        python ${{ github.workspace }}/Ddns.py
+        python ${{ github.workspace }}/Dynv6.py
         
     - name: Commit and push changes
       run: |
