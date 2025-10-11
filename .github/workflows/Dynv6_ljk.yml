@@ -35,7 +35,9 @@ jobs:
         DYNV6_TOKEN: ${{ secrets.DYNV6_TOKEN }}
         QQ_771_TOKEN: ${{ secrets.QQ_771_TOKEN }}
         DYNU_TOKEN: ${{ secrets.DYNU_TOKEN }}
+        LIVE_F02_TOKEN: ${{ secrets.LIVE_F02_TOKEN }}
         LIVE_CFV_TOKEN: ${{ secrets.LIVE_CFV_TOKEN }}
+        LJK_E37_TOKEN: ${{ secrets.LJK_E37_TOKEN }}
       run: |
         python ${{ github.workspace }}/Dynv6.py
         
