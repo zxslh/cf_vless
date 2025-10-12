@@ -80,6 +80,7 @@ if __name__ == "__main__":
         'https://api.uouin.com/cloudflare.html',
         'https://addressesapi.090227.xyz/CloudFlareYes',
         'https://vps789.com/openApi/cfIpApi'
+        'https://vps789.com/openApi/cfIpTop20'
     ]
     unique_ips = set()
     ip_pattern = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
