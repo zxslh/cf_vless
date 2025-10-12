@@ -1,3 +1,3 @@
 selenium==4.21.0
-# 与YAML中Chrome版本（128.0.6613.138）完全匹配
-chromedriver-binary==128.0.6613.138
+# 用webdriver-manager自动匹配Chrome 127.x的驱动，避免版本缺失问题
+webdriver-manager==4.0.1
