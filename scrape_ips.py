@@ -1,8 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
-# 导入chromedriver-binary的路径
-import chromedriver_binary  # 这行会自动添加ChromeDriver到系统路径
+# 恢复使用webdriver-manager，指定Chrome版本匹配
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.core.utils import ChromeType
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -15,11 +16,17 @@ def scrape_refreshed_content():
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument(
-        "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
+        "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
     )
 
-    # 直接使用chromedriver-binary提供的驱动（无需再用Service指定路径）
-    driver = webdriver.Chrome(options=chrome_options)  # 关键修改：移除service参数
+    # 核心修改：指定Chrome版本，让webdriver-manager下载对应驱动
+    service = Service(
+        ChromeDriverManager(
+            chrome_type=ChromeType.GOOGLE,  # 明确使用官方Chrome（非Chromium）
+            version="127.0.6533.88"  # 与安装的Chrome版本完全一致
+        ).install()
+    )
+    driver = webdriver.Chrome(service=service, options=chrome_options)
 
     try:
         target_url = "https://api.uouin.com/cloudflare.html"
@@ -36,7 +43,7 @@ def scrape_refreshed_content():
         )
         print("页面刷新并渲染完成")
 
-        # 后续提取内容、保存文件逻辑不变...
+        # 提取并保存IP数据
         ip_tables = driver.find_elements(By.CLASS_NAME, "table")
         result = "Cloudflare优选IP（刷新后数据）\n"
         result += "="*50 + "\n"
