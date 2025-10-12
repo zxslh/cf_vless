@@ -52,7 +52,7 @@ def update_dynv6_A(zone):
                 create_response = requests.post(url, headers=headers, data=json.dumps(record_data))
                 create_response.raise_for_status()
             print(f"✅ 成功：{sub_name}.{domain} → {current_ip}")
-            bulid_vless_urls(str(sub_name), domain, '002.ljk', 'LJK_E37_TOKEN')
+            bulid_vless_urls(str(sub_name), domain, '002.ljk-clouflare.dns.army', 'LJK_E37_TOKEN')
         except Exception as e:
             print(f"❌ {sub_name}.{domain} 操作失败：{str(e)}")
         finally:
@@ -64,8 +64,7 @@ def bulid_vless_urls(a, b, c, d):
     uuid = os.getenv(d)
     if not uuid: return
     port = random.choice(ports)
-    host = f'{c}-clouflare.dns.army'
-    if not uuid: return
+    host = c
     vless_url = f"vless://{uuid}@{a}.{b}:{port}?path=%2F%3Fed%3D2560&security=tls&encryption=none&host={host}&type=ws&sni={host}#{c[0:3]}-{b[0]}-{a}"
     vless_urls += f'{vless_url}\n'
             
