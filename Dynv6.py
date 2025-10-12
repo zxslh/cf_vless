@@ -27,7 +27,7 @@ def update_dynv6_A(zone):
         return
     #形成url
     url = f"{base_url}/{zoneID}/records"
-    sub_name = 11
+    sub_name = 1
     while sub_name < 41:
         try:
             current_ip = unique_ips.pop()
@@ -51,10 +51,10 @@ def update_dynv6_A(zone):
             if not record_found:
                 create_response = requests.post(url, headers=headers, data=json.dumps(record_data))
                 create_response.raise_for_status()
-            print(f"✅ 成功：{sub_name}.{domain} → {current_ip}")
-            bulid_vless_urls(str(sub_name), domain)
+            print(f"✅ 成功：f'{sub_name:02d}'.{domain} → {current_ip}")
+            bulid_vless_urls(f'{sub_name:02d}', domain)
         except Exception as e:
-            print(f"❌ {sub_name}.{domain} 操作失败：{str(e)}")
+            print(f"❌ {sub_name:02d}.{domain} 操作失败：{str(e)}")
         finally:
             sub_name += 1
             
