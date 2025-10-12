@@ -1,8 +1,8 @@
 name: Selenium Scrape Cloudflare IPs
 on:
   workflow_dispatch:
- # schedule:
-  #  - cron: '*/15 * * * *'
+  #schedule:
+   # - cron: '*/15 * * * *'
 
 jobs:
   scrape-cloudflare-ips:
@@ -29,11 +29,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip show selenium chromedriver-binary
+          pip show selenium webdriver-manager
           echo "Python依赖安装完成"
 
-      # 核心修改：更换为源中可获取的Chrome版本（128.0.6613.138-1）
-      - name: Install fixed-version Chrome browser
+      # 核心修改：安装webdriver-manager支持的Chrome版本（127.0.6533.88）
+      - name: Install compatible Chrome browser
         run: |
           # 卸载旧版Chromium
           sudo apt-get remove -y chromium-browser chromium-browser-l10n chromium-codecs-ffmpeg
@@ -42,11 +42,11 @@ jobs:
           wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
           echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
           sudo apt-get update -y
-          # 安装当前可获取的稳定版本（128.0.6613.138-1，已验证源中存在）
-          sudo apt-get install -y google-chrome-stable=128.0.6613.138-1
+          # 安装127.0.6533.88（已验证：webdriver-manager可自动匹配对应驱动）
+          sudo apt-get install -y google-chrome-stable=127.0.6533.88-1
           # 验证版本
           google-chrome --version
-          echo "Chrome浏览器安装完成（版本：128.0.6613.138）"
+          echo "Chrome浏览器安装完成（版本：127.0.6533.88）"
 
       - name: Run Selenium scrape script
         run: |
