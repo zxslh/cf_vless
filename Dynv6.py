@@ -66,7 +66,7 @@ def bulid_vless_urls(a, b):
     port = random.choice(ports)
     port = 443
     host = '002.ljk-clouflare.dns.army'
-    vless_url = f"vless://{uuid}@{a}.{b}:{port}?path=%2F%3Fed%3D2560&security=tls&encryption=none&host={c}&type=ws&sni={c}#{c[0:3]}-{b[0]}-{a}"
+    vless_url = f"vless://{uuid}@{a}.{b}:{port}?path=%2F%3Fed%3D2560&security=tls&encryption=none&host={host}&type=ws&sni={host}#{host[0:3]}-{b[0]}-{a}"
     vless_urls += f'{vless_url}\n'
             
 if __name__ == "__main__":
