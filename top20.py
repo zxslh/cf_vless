@@ -1,5 +1,6 @@
 import requests
 import json
+import os
 
 def build_file():
     uuid = os.getenv('LIVE_CFV_TOKEN')
