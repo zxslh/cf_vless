@@ -1,3 +1,3 @@
 selenium==4.21.0
-# 用webdriver-manager自动匹配Chrome 127.x的驱动，避免版本缺失问题
+# 使用最新版webdriver-manager，确保兼容最新Chrome
 webdriver-manager==4.0.1
