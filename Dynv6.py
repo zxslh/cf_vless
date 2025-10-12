@@ -64,6 +64,7 @@ def bulid_vless_urls(a, b, c, d):
     uuid = os.getenv(d)
     if not uuid: return
     port = random.choice(ports)
+    port = 443
     host = c
     vless_url = f"vless://{uuid}@{a}.{b}:{port}?path=%2F%3Fed%3D2560&security=tls&encryption=none&host={host}&type=ws&sni={host}#{c[0:3]}-{b[0]}-{a}"
     vless_urls += f'{vless_url}\n'
