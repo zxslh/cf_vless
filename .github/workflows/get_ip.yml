@@ -30,7 +30,7 @@ jobs:
         keep_minimum_runs: 4
         
     - name: Run script
-      run: python ${{ github.workspace }}/Dynu.py
+      run: python ${{ github.workspace }}/Ddns.py
         
     - name: Commit and push changes
       run: |
