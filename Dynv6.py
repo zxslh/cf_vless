@@ -58,7 +58,7 @@ def update_dynv6_A(zone):
         finally:
             sub_name += 1
             
-def bulid_vless_urls(a, b, c, d):
+def bulid_vless_urls(a, b):
     global vless_urls
     ports = ['443','2053','2083','2087','2096','8443']
     uuid = os.getenv('LJK_E37_002')
