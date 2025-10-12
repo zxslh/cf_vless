@@ -13,14 +13,15 @@ def build_file():
         response.raise_for_status()
         all_records = response.json()['data']['good']
     except Exception as e:
-        print(f"❌ {sub_name}.{domain} 操作失败：{str(e)}")
+        print(f"❌ 失败：{str(e)}")
         return
     i = 1
     for record in all_records:
         ip = record['ip']
-        vless_url = f"vless://{uuid}@ip:{port}?path=%2F%3Fed%3D2560&security=tls&encryption=none&host={host}&type=ws&sni={host}#TOP{i}"
+        vless_url = f"vless://{uuid}@ip:{port}?path=%2F%3Fed%3D2560&security=tls&encryption=none&host={host}&type=ws&sni={host}#TOP{i:02d}"
         vless_urls += f'{vless_url}\n'
         print(f"✅ 成功：{ip} → TOP{i:02d}")
+        i += 1
     if vless_urls:
         with open('top20', 'w', encoding='utf-8') as file:
             file.write(vless_urls)
