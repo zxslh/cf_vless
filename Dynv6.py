@@ -61,7 +61,7 @@ def update_dynv6_A(zone):
 def bulid_vless_urls(a, b):
     global vless_urls
     ports = ['443','2053','2083','2087','2096','8443']
-    uuid = os.getenv('LJK_E37_002')
+    uuid = os.getenv('LJK_E37_TOKEN')
     if not uuid: return
     port = random.choice(ports)
     port = 443
