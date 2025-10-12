@@ -3,6 +3,7 @@ import json
 import os
 
 def build_file():
+    vless_urls = ''
     uuid = os.getenv('LIVE_CFV_TOKEN')
     port = '443'
     host = 'cfv.live-zxs.dns.army'
