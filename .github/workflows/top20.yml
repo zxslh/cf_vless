@@ -2,7 +2,7 @@ name: update top20
 
 on:
   schedule:
-    - cron: '30 03 * * 3' # 周一早三点半运行
+    - cron: '30 06 * * *' # 每天运行
   workflow_dispatch: # 允许手动触发
 
 jobs:
