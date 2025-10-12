@@ -1,13 +1,12 @@
 name: Selenium Scrape Cloudflare IPs
 on:
-  # 可选触发方式：手动触发/定时触发（每15分钟一次，可调整）
-  workflow_dispatch:  # 手动触发（在GitHub仓库“Actions”页点击运行）
-  schedule:
-    - cron: '*/15 * * * *'  # 定时触发，格式：分 时 日 月 周
+  workflow_dispatch:  # 手动触发
+ # schedule:
+   # - cron: '*/15 * * * *'  # 定时触发（每15分钟）
 
 jobs:
   scrape:
-    runs-on: ubuntu-latest  # 使用Linux runner（无界面，需Headless模式）
+    runs-on: ubuntu-latest
     steps:
       - name: 1. 拉取仓库代码
         uses: actions/checkout@v4
@@ -15,23 +14,37 @@ jobs:
       - name: 2. 安装Python环境
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'  # 指定Python版本
+          python-version: '3.10'
 
-      - name: 3. 安装依赖包
+      # ------------------- 新增：缓存pip依赖 -------------------
+      - name: 3. 缓存Python依赖（避免重复安装）
+        uses: actions/cache@v3
+        with:
+          # 缓存路径：Ubuntu系统中pip依赖默认存放在~/.cache/pip
+          path: ~/.cache/pip
+          # 缓存键：由“操作系统+pip+requirements.txt哈希值”组成
+          # 仅当requirements.txt内容变化时，才会重新生成缓存
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          # 恢复键：若精确匹配失败，可使用同操作系统的旧缓存（可选，提升命中率）
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      # ---------------------------------------------------------
+
+      - name: 4. 安装依赖包（缓存命中时，直接跳过下载，仅验证安装）
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: 4. 安装Chrome浏览器（Linux）
+      - name: 5. 安装Chrome浏览器（Linux）
         run: |
           sudo apt-get update
-          sudo apt-get install -y chromium-browser  # 安装无界面Chrome
+          sudo apt-get install -y chromium-browser
 
-      - name: 5. 运行Selenium爬虫脚本
-        run: python scrape_ips.py  # 执行爬虫脚本
+      - name: 6. 运行Selenium爬虫脚本
+        run: python scrape_ips.py
 
-      - name: 6. 保存结果（可选，将提取的IP保存为文件并上传）
+      - name: 7. 上传结果文件
         uses: actions/upload-artifact@v4
         with:
           name: cloudflare-ips-result
-          path: ips_result.txt  # 脚本中需将结果写入该文件
+          path: ips_result.txt
