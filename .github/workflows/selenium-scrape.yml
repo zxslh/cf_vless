@@ -34,19 +34,7 @@ jobs:
       # 核心修改：安装系统源中最新的Chrome（不固定版本，避免下架问题）
       - name: Install latest stable Chrome
         run: |
-          # 卸载旧版Chromium，避免冲突
-          sudo apt-get remove -y chromium-browser chromium-browser-l10n chromium-codecs-ffmpeg
-          sudo apt-get autoremove -y
-          # 添加Chrome官方源
-          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-          echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
-          sudo apt-get update -y
-          # 安装最新稳定版Chrome（不指定版本，取源中最新可用）
-          sudo apt-get install -y google-chrome-stable
-          # 打印安装的Chrome版本（供后续脚本匹配驱动）
-          google-chrome --version > chrome_version.txt
-          cat chrome_version.txt
-          echo "Chrome浏览器安装完成"
+          pip install page-parser
 
       - name: Run Selenium scrape script
         run: |
