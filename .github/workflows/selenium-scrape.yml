@@ -1,59 +1,72 @@
 name: Selenium Scrape Cloudflare IPs
 on:
-  workflow_dispatch:  # 手动触发
- # schedule:
-   # - cron: '*/15 * * * *'  # 定时触发（每15分钟）
+  # 触发方式：手动触发 + 每15分钟定时触发（可按需调整cron表达式）
+  workflow_dispatch:
+  #schedule:
+   # - cron: '*/15 * * * *'
 
 jobs:
-  scrape:
-    runs-on: ubuntu-latest
+  scrape-cloudflare-ips:
+    runs-on: ubuntu-latest  # 固定使用Linux环境（无界面，适配Headless Chrome）
     steps:
-      - name: 1. 拉取仓库代码
+      # 步骤1：拉取仓库代码到GitHub Actions runner
+      - name: Checkout repository code
         uses: actions/checkout@v4
 
-      - name: 2. 安装Python环境
+      # 步骤2：安装指定版本的Python（与本地开发环境一致，避免版本兼容问题）
+      - name: Set up Python environment
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.10'  # 推荐使用3.9+版本，兼容selenium 4.x
+          cache: 'pip'  # 辅助缓存pip依赖（与后续actions/cache形成双重保障）
 
-      # ------------------- 新增：缓存pip依赖 -------------------
-      - name: 3. 缓存Python依赖（避免重复安装）
+      # 步骤3：缓存pip依赖（核心，避免每次重新下载）
+      - name: Cache Python dependencies
         uses: actions/cache@v3
         with:
-          # 缓存路径：Ubuntu系统中pip依赖默认存放在~/.cache/pip
-          path: ~/.cache/pip
-          # 缓存键：由“操作系统+pip+requirements.txt哈希值”组成
-          # 仅当requirements.txt内容变化时，才会重新生成缓存
+          path: ~/.cache/pip  # Ubuntu系统pip缓存默认路径
+          # 缓存键：操作系统 + pip + requirements.txt哈希值（文件不变则复用缓存）
           key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
-          # 恢复键：若精确匹配失败，可使用同操作系统的旧缓存（可选，提升命中率）
+          # 恢复键：若精确缓存未命中，使用同操作系统的旧缓存
           restore-keys: |
             ${{ runner.os }}-pip-
-      # ---------------------------------------------------------
 
-      - name: 4. 安装依赖包（缓存命中时，直接跳过下载，仅验证安装）
+      # 步骤4：安装Python依赖包（缓存命中时仅验证安装，速度极快）
+      - name: Install Python dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          python -m pip install --upgrade pip  # 升级pip到最新版
+          pip install -r requirements.txt  # 从requirements.txt安装依赖
+          # 验证关键依赖版本（方便调试）
+          pip show selenium chromedriver-binary
+          echo "Python依赖安装完成"
 
-      - name: 5. 安装指定版本的Chrome浏览器（Linux）
+      # 步骤5：安装固定版本的Chrome浏览器（与chromedriver-binary版本严格匹配）
+      - name: Install fixed-version Chrome browser
         run: |
-    # 卸载系统默认的旧版Chrome
-          sudo apt-get remove -y chromium-browser chromium-browser-l10n
-    # 添加Chrome官方源
+          # 1. 卸载系统默认的旧版Chromium（避免版本冲突）
+          sudo apt-get remove -y chromium-browser chromium-browser-l10n chromium-codecs-ffmpeg
+          sudo apt-get autoremove -y
+          # 2. 添加Chrome官方软件源（确保能安装指定版本）
           wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
           echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
-          sudo apt-get update
-    # 安装指定版本的Chrome（与chromedriver-binary版本匹配）
+          sudo apt-get update -y
+          # 3. 安装指定版本的Chrome（与requirements.txt中chromedriver-binary版本匹配）
           sudo apt-get install -y google-chrome-stable=129.0.6668.89-1
-    # 验证安装版本
+          # 4. 验证Chrome版本（确保安装成功）
           google-chrome --version
+          echo "Chrome浏览器安装完成（版本：129.0.6668.89）"
 
+      # 步骤6：运行Selenium爬虫脚本（核心逻辑，提取刷新后的IP数据）
+      - name: Run Selenium scrape script
+        run: |
+          python scrape_ips.py  # 执行爬虫脚本
+          echo "爬虫脚本执行完成，结果已保存到ips_result.txt"
 
-      - name: 6. 运行Selenium爬虫脚本
-        run: python scrape_ips.py
-
-      - name: 7. 上传结果文件
+      # 步骤7：上传爬取结果（将ips_result.txt作为Artifact供下载）
+      - name: Upload scrape result
         uses: actions/upload-artifact@v4
         with:
-          name: cloudflare-ips-result
-          path: ips_result.txt
+          name: cloudflare-ips-${{ github.run_id }}  # Artifact名称含运行ID，避免重复
+          path: ips_result.txt  # 要上传的文件路径
+          retention-days: 7  # 结果文件保留7天（可按需调整，最大90天）
+          if-no-files-found: error  # 若文件未生成，标记为错误（方便排查）
