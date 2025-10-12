@@ -35,10 +35,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: 5. 安装Chrome浏览器（Linux）
+      - name: 5. 安装指定版本的Chrome浏览器（Linux）
         run: |
+    # 卸载系统默认的旧版Chrome
+          sudo apt-get remove -y chromium-browser chromium-browser-l10n
+    # 添加Chrome官方源
+          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
           sudo apt-get update
-          sudo apt-get install -y chromium-browser
+    # 安装指定版本的Chrome（与chromedriver-binary版本匹配）
+          sudo apt-get install -y google-chrome-stable=129.0.6668.89-1
+    # 验证安装版本
+          google-chrome --version
+
 
       - name: 6. 运行Selenium爬虫脚本
         run: python scrape_ips.py
