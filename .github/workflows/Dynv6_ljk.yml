@@ -2,7 +2,7 @@ name: update Dynv6 A
 
 on:
   schedule:
-    - cron: '30 03 * * 1' # 每3小时运行一次
+    - cron: '30 03 * * 1' # 周一早三点半运行
   workflow_dispatch: # 允许手动触发
 
 jobs:
