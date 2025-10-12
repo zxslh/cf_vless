@@ -38,6 +38,7 @@ jobs:
         LIVE_F02_TOKEN: ${{ secrets.LIVE_F02_TOKEN }}
         LIVE_CFV_TOKEN: ${{ secrets.LIVE_CFV_TOKEN }}
         LJK_E37_TOKEN: ${{ secrets.LJK_E37_TOKEN }}
+        LJK_E37_003: ${{ secrets.LJK_E37_003 }}
       run: |
         python ${{ github.workspace }}/Dynv6.py
         
