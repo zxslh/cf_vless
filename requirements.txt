@@ -1,3 +1,3 @@
 selenium==4.21.0
-# 替换webdriver-manager，直接指定ChromeDriver版本（需与下面安装的Chrome版本匹配）
-chromedriver-binary==129.0.6668.89
+# 与YAML中Chrome版本（128.0.6613.138）完全匹配
+chromedriver-binary==128.0.6613.138
