@@ -9,8 +9,7 @@ def build_file():
     host = 'cfv.live-zxs.dns.army'
     if not uuid: return
     try:
-        base_url = f"https://vps789.com/openApi/cfIpTop20"
-        response = requests.get(base_url)
+        response = requests.get('https://vps789.com/openApi/cfIpTop20')
         response.raise_for_status()
         all_records = response.json()['data']['good']
     except Exception as e:
