@@ -18,7 +18,7 @@ def build_file():
     i = 1
     for record in all_records:
         ip = record['ip']
-        vless_url = f"vless://{uuid}@ip:{port}?path=%2F%3Fed%3D2560&security=tls&encryption=none&host={host}&type=ws&sni={host}#TOP{i:02d}"
+        vless_url = f"vless://{uuid}@{ip}:{port}?path=%2F%3Fed%3D2560&security=tls&encryption=none&host={host}&type=ws&sni={host}#TOP{i:02d}"
         vless_urls += f'{vless_url}\n'
         print(f"✅ 成功：{ip} → TOP{i:02d}")
         i += 1
