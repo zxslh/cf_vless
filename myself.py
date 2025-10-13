@@ -82,7 +82,7 @@ if __name__ == "__main__":
         'https://vps789.com/openApi/cfIpTop20'
     ]
     unique_ips = set()
-    with open('badip', 'r', encoding='utf-8') as file:
+    with open('badips', 'r', encoding='utf-8') as file:
         for ip in file:
             unique_ips.pop(ip)
     ip_pattern = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
