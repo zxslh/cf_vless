@@ -16,7 +16,7 @@ urls = [
 ip_pattern = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
 badips = ['172.64.88.85','104.18.39.252','104.18.42.183','104.19.44.225']
 ips = {}
-
+uips = set()
 for url in urls:
     try:
         response = requests.get(url, timeout=10).text
@@ -25,10 +25,17 @@ for url in urls:
             if badip in ip_matches:
                 print(f'{url} {badip}')
         ips = {'url': url, 'ip': ip_matches}
+        uips.update(ip_matches)
     except Exception as e:
         print(f'❌ 错误：{str(e)}')
         continue
-    
+with open('badips', 'r', encoding='utf-8') as file:
+        for ip in file:
+            unique_ips.pop(ip)
+for badip in badips:
+    if badip in unique_ips:
+        print('bad')
+
 if not ips:
     print('❌ 错误：获取CFIP失败')
 else:
