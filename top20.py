@@ -3,10 +3,11 @@ import json
 import os
 
 def build_file():
-    uuid = os.getenv('LIVE_CFV_TOKEN')
-    port = '443'
-    host = 'cfv.live-zxs.dns.army'
+    uuid = os.getenv('LJK_E37_TOKEN')
     if not uuid: return
+    port = random.choice(ports)
+    port = 443
+    host = '002.ljk-clouflare.dns.army'
         
     try:
         response = requests.get('https://vps789.com/openApi/cfIpTop20', timeout=10)
