@@ -39,6 +39,7 @@ jobs:
         LIVE_CFV_TOKEN: ${{ secrets.LIVE_CFV_TOKEN }}
         LJK_E37_TOKEN: ${{ secrets.LJK_E37_TOKEN }}
         LJK_E37_003: ${{ secrets.LJK_E37_003 }}
+        CF_VLESS_ADDR: ${{ secrets.CF_VLESS_ADDR }}
       run: |
         python ${{ github.workspace }}/Dynv6.py
         
