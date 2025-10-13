@@ -51,7 +51,7 @@ def update_dynv6_A(zone):
             if not record_found:
                 create_response = requests.post(url, headers=headers, data=json.dumps(record_data))
                 create_response.raise_for_status()
-            print(f"✅ 成功：f'{sub_name:02d}'.{domain} → {current_ip}")
+            print(f"✅ 成功：{sub_name:02d}.{domain} → {current_ip}")
             bulid_vless_urls(f'{sub_name:02d}', domain)
         except Exception as e:
             print(f"❌ {sub_name:02d}.{domain} 操作失败：{str(e)}")
