@@ -23,7 +23,7 @@ for url in urls:
         ip_matches = re.findall(ip_pattern, response, re.IGNORECASE)
         for badip in badips:
             if badip in ip_matches:
-                psint(f'{ip_matches} {badip}')
+                psint(f'{url} {badip}')
         ips = {'url': url, 'ip': ip_matches}
     except Exception as e:
         print(f'❌ 错误：{str(e)}')
