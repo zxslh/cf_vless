@@ -28,7 +28,7 @@ def update_dynv6_A(zone):
     #形成url
     url = f"{base_url}/{zoneID}/records"
     sub_name = 1
-    while sub_name < 41:
+    while sub_name < 51:
         try:
             current_ip = unique_ips.pop()
             if not current_ip: return
