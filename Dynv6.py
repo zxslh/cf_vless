@@ -77,9 +77,8 @@ if __name__ == "__main__":
         'https://ipdb.api.030101.xyz/?type=bestcf&country=true',
         'https://ip.164746.xyz/ipTop10.html',
         'https://www.wetest.vip/page/cloudflare/total_v4.html',
-        'https://api.uouin.com/cloudflare.html',
         'https://addressesapi.090227.xyz/CloudFlareYes',
-        'https://vps789.com/openApi/cfIpApi'
+        'https://vps789.com/openApi/cfIpApi',
         'https://vps789.com/openApi/cfIpTop20'
     ]
     unique_ips = set()
