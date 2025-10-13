@@ -10,7 +10,7 @@ urls = [
         'https://addressesapi.090227.xyz/CloudFlareYes',
         'https://vps789.com/openApi/cfIpApi',
         'https://vps789.com/openApi/cfIpTop20',
-        'https://raw.githubusercontent.com/NiREvil/vless/refs/heads/main/sub/Cf-ipv4.json
+        'https://raw.githubusercontent.com/NiREvil/vless/refs/heads/main/sub/Cf-ipv4.json',
 ]
     
 ip_pattern = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
