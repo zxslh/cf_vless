@@ -33,8 +33,10 @@ with open('badips', 'r', encoding='utf-8') as file:
         for ip in file:
             unique_ips.pop(ip)
 for badip in badips:
-    if badip in unique_ips:
+    if badip in uips:
         print('bad')
+    else:
+        print('good')
 
 if not ips:
     print('❌ 错误：获取CFIP失败')
