@@ -33,7 +33,7 @@ def update_dynv6_A(zone):
             current_ip = unique_ips.pop()
             if not current_ip: return
             record_data = {
-                "name": str(sub_name),
+                "name": f'{sub_name:02d}',
                 "type": "A",
                 "data": current_ip,  # 用变量暂存IP，方便后续引用
                 "ttl": 3600
@@ -43,7 +43,7 @@ def update_dynv6_A(zone):
             all_records = response.json()
             record_found = False
             for record in all_records:
-                if record["name"] == str(sub_name) and record["type"] == "A":
+                if record["name"] == f'{sub_name:02d}' and record["type"] == "A":
                     renew_response = requests.patch(f"{url}/{record['id']}", headers=headers, data=json.dumps(record_data))
                     renew_response.raise_for_status()
                     record_found = True  # 标记已找到并更新
