@@ -1,4 +1,4 @@
-name: update top20
+name: get_ip
 
 on:
  # schedule:
