@@ -82,9 +82,12 @@ if __name__ == "__main__":
         'https://vps789.com/openApi/cfIpTop20'
     ]
     unique_ips = set()
-    with open('badips', 'r', encoding='utf-8') as file:
-        for badip in file:
-            unique_ips.discard(badip.rstrip())
+    try:
+        with open('badips', 'r', encoding='utf-8') as file:
+            for badip in file:
+                unique_ips.discard(badip.strip())
+    except Exception as e:
+            print(f"❌ 读取失败: {str(e)}")
     ip_pattern = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
     api_token = os.getenv('DYNV6_TOKEN')
 
