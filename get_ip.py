@@ -31,7 +31,7 @@ for url in urls:
         continue
 with open('badips', 'r', encoding='utf-8') as file:
         for ip in file:
-            uips.pop(ip)
+            uips.remove(ip)
 for badip in badips:
     if badip in uips:
         print('bad')
