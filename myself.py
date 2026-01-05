@@ -102,7 +102,7 @@ def test_ip_connection(ip, port=443, timeout=2):
     except ConnectionRefusedError:
         return False, "端口拒绝连接（端口关闭）", -1, '未知'
     except Exception as e:
-        return False, f"连接失败：{str(e)[:6]}...", -1, '未知'
+        return False, f"连接失败：{str(e)[:50]}...", -1, '未知'
         
 def sort_out_cfips_json(test_us_num=0, test_other_num=0):
     unique_ip_list = []
