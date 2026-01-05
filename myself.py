@@ -4,6 +4,7 @@ import re
 import os
 import random
 import socket
+import time
 
 def update_dynv6_A(zone):
     #基础变量，api_token使用全局变量
