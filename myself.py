@@ -205,7 +205,7 @@ if __name__ == "__main__":
     list_ips = []
     sort_out_cfips_json()
     try:
-        with open('abcd.json', 'r', encoding='utf-8') as file:
+        with open('abcd.json', 'r', encoding='utf-8-sig') as file:
             json_data = json.load(file)
             if not json_data['ipv4']: raise Exception('没有json数据')
             for index, item in enumerate(json_data['ipv4']):
