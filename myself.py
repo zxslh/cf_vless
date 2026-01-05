@@ -28,9 +28,10 @@ def update_dynv6_A(zone):
     #形成url
     url = f"{base_url}/{zoneID}/records"
     sub_name = 1
-    while sub_name < 51:
+    for ip in list_ips:
+        if sub_name > 50: break
         try:
-            current_ip = unique_ips.pop()
+            current_ip = ip
             if not current_ip: return
             record_data = {
                 "name": f'{sub_name:02d}',
@@ -68,38 +69,118 @@ def bulid_vless_urls(a, b):
     host = '002.ljk-clouflare.dns.army'
     vless_url = f"vless://{uuid}@{a}.{b}:{port}?path=%2F%3Fed%3D2560&security=tls&encryption=none&host={host}&type=ws&sni={host}#{host[0:3]}-{b[0]}-{a}"
     vless_urls += f'{vless_url}\n'
-            
-if __name__ == "__main__":
-    vless_urls = ''
+ 
+def sort_out_cfips_json(test_us_num=0, test_other_num=0):
+    unique_ip_list = []
+    unique_ip_dict = {}
+    unique_group_dict = {}
+    cfips_path = 'abcd.json'
+    try:
+        with open(cfips_path, 'r', encoding="utf-8-sig") as f:
+            ips_data = json.load(f)
+        # 按group分组，每组最多保留前5个
+        for item in ips_data['ipv4']:
+            key = item.get('group', '未分组')
+            if len(unique_group_dict.setdefault(key, [])) < 5:
+                unique_group_dict[key].append(item)
+                unique_ip_list.append(item)
+        # 过滤重复IP
+        unique_ip_dict = {item['ip']: item for item in unique_ip_list}
+    except Exception as e:
+        print(str(e))
+        pass
 
-    urls = [
+    getips_urls = [
         'https://ip.164746.xyz',
         'https://ipdb.api.030101.xyz/?type=bestcf&country=true',
-        'https://ip.164746.xyz/ipTop10.html',
         'https://www.wetest.vip/page/cloudflare/total_v4.html',
-        'https://addressesapi.090227.xyz/CloudFlareYes',
         'https://vps789.com/openApi/cfIpApi',
-        'https://vps789.com/openApi/cfIpTop20'
+        'https://cf.090227.xyz/CloudFlareYes',
+        'https://www.wetest.vip/page/cloudflare/address_v4.html',
+        'https://raw.githubusercontent.com/NiREvil/vless/refs/heads/main/sub/Cf-ipv4.json',
     ]
-    unique_ips = set()
-    try:
-        with open('badips', 'r', encoding='utf-8') as file:
-            for badip in file:
-                unique_ips.discard(badip.strip())
-    except Exception as e:
-            print(f"❌ 读取失败: {str(e)}")
-    ip_pattern = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
-    api_token = os.getenv('DYNV6_TOKEN')
-
-    for url in urls:
+    ip_pattern = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'  # 仅匹配IPv4的正则
+    print(f"  📥 开始爬取新IP（共{len(getips_urls)}个源）：")
+    all_new_ip_num = 0
+    for url in getips_urls:
+        new_ip_num = 0
         try:
             response = requests.get(url, timeout=10).text
-            ip_matches = re.findall(ip_pattern, response, re.IGNORECASE)
-            unique_ips.update(ip_matches)
+            ipv4s = re.findall(ip_pattern, response, re.IGNORECASE)
+            for ip in ipv4s:
+                new_ip_info = {}
+                if ip not in unique_ip_dict:
+                    new_ip_num += 1
+                    all_new_ip_num += 1
+                    new_ip_info['ip'] = ip
+                    new_ip_info['port'] = 443
+                    new_ip_info['group'] = ".".join(ip.split(".")[:3])
+                    new_ip_info['name'] = '未知'
+                    new_ip_info['cost_time'] = -1
+                    unique_ip_dict[ip] = new_ip_info
+            print(f"    🆕 {url.split('//')[1][:13]}... 爬{len(ipv4s)}个，获取{new_ip_num}个")
         except Exception as e:
+            print(f"    ❌ {url.split('//')[1][:13]}... 失败: {str(e)[:20]}...")
             continue
+    print('  📥 爬取完成！')
+    print('  🔄 更新IP信息')
+    unique_ip_list = list(unique_ip_dict.values())
+    good_cost_time = [item for item in unique_ip_list if item['cost_time'] != -1]
+    bad_cost_time = [item for item in unique_ip_list if item['cost_time'] == -1]
+    if bad_cost_time:
+        print(f'    🔄 新增IP（{all_new_ip_num}），连接超时（{len(bad_cost_time)-all_new_ip_num}）个')
+        for index, ip_info in enumerate(bad_cost_time, 1):
+            is_valid, test_msg, cost_time, location = test_ip_connection(ip_info['ip'], ip_info['port'])
+            if is_valid and (cost_time < 300 or location != 'United States'):
+                ip_info['cost_time'] = cost_time
+                if ip_info['name'] == '未知': ip_info['name'] = location
+                good_cost_time.append(ip_info)
+                print(f"      ✅ Index: {str(index).ljust(5)} | {f'{ip_info["ip"]}:{ip_info["port"]}'.ljust(21)} | {test_msg} | {location.ljust(30)}", end="\r")
+            else:
+                print(f"      🗑️ Index: {str(index).ljust(5)} | {f'{ip_info["ip"]}:{ip_info["port"]}'.ljust(21)} | {test_msg.ljust(38)}")
+        print('')
+    unknown = [item for item in good_cost_time if item['name'] == '未知']
+    known = [item for item in good_cost_time if item['name'] != '未知']
+    us = [item for item in known if item['name'] == 'United States']
+    other = [item for item in known if item['name'] != 'United States']
+    test_ipv4s_data = unknown + us[:test_us_num] + other[:test_other_num]
+    if test_ipv4s_data:
+        print(f'    🔄 更新IP连接耗时：未知 （{len(unknown)}）个，United States（{min(test_us_num,len(us))}）个, Other（{min(test_other_num,len(other))}）个')
+        for index, ip_info in enumerate(test_ipv4s_data, 1):
+            is_valid, test_msg, cost_time, location = test_ip_connection(ip_info['ip'], ip_info['port'])
+            ip_info['cost_time'] = cost_time
+            if ip_info['name'] == '未知': ip_info['name'] = location
+            if is_valid:
+                print(f"      ✅ Index: {str(index).ljust(5)} | {f'{ip_info["ip"]}:{ip_info["port"]}'.ljust(21)} | {test_msg} | {location.ljust(30)}", end="\r")
+            else:
+                print(f"      ⚠️ Index: {str(index).ljust(5)} | {f'{ip_info["ip"]}:{ip_info["port"]}'.ljust(21)} | {test_msg.ljust(38)}")
+        print('')
+    print(f"  🔄 更新完成！")
+    unique_ip_list = us[test_us_num:] + other[test_other_num:] + test_ipv4s_data
+    unique_ip_list.sort(key=lambda x: x['cost_time'])
 
-    if unique_ips:
+    ips_data['ipv4'] = unique_ip_list
+    with open(cfips_path, 'w', encoding="utf-8-sig") as f:
+        json.dump(ips_data, f, indent=2, ensure_ascii=False)
+    print(f"  🌟 写入IP总数：{len(ips_data['ipv4'])}个；原group数量：{len(unique_group_dict)}")
+           
+if __name__ == "__main__":
+    vless_urls = ''
+    list_ips = []
+    sort_out_cfips_json()
+    try:
+        with open('abcd.json', 'r', encoding='utf-8') as file:
+            json_data = json.loads(file)
+            if not json_data['ipv4']: raise Exception('没有json数据')
+            for index, item in enumerate(json_data['ipv4']):
+                if index > 51: break
+                list_ips.append(item['ip'])
+    except Exception as e:
+        print(f"❌ 读取失败: {str(e)}")
+        return
+    api_token = os.getenv('DYNV6_TOKEN')
+
+    if list_ips:
         update_dynv6_A(os.getenv('CF_VLESS_ADDR'))
 
    # if vless_urls:
