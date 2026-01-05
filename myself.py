@@ -110,6 +110,7 @@ def sort_out_cfips_json(test_us_num=0, test_other_num=0):
     unique_ip_dict = {}
     unique_group_dict = {}
     cfips_path = 'abcd.json'
+    ips_data = {}
     try:
         with open(cfips_path, 'r', encoding="utf-8-sig") as f:
             ips_data = json.load(f)
