@@ -3,6 +3,7 @@ import json
 import re
 import os
 import random
+import socket
 
 def update_dynv6_A(zone):
     #基础变量，api_token使用全局变量
@@ -69,7 +70,40 @@ def bulid_vless_urls(a, b):
     host = '002.ljk-clouflare.dns.army'
     vless_url = f"vless://{uuid}@{a}.{b}:{port}?path=%2F%3Fed%3D2560&security=tls&encryption=none&host={host}&type=ws&sni={host}#{host[0:3]}-{b[0]}-{a}"
     vless_urls += f'{vless_url}\n'
- 
+    
+def test_ip_connection(ip, port=443, timeout=2):
+    """测试IP+端口的TCP连接，返回(连接结果, 状态描述, 耗时ms)"""
+    try:
+        if '.' in ip:  # IPv4
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            target_addr = (ip, int(port))
+        elif ':' in ip:  # IPv6（预留逻辑，当前未实际使用）
+            sock = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
+            addr_info = socket.getaddrinfo(ip, int(port), socket.AF_INET6, socket.SOCK_STREAM)
+            target_addr = addr_info[0][4]
+        else:
+            return False, f"IP格式错误：{ip} 非法", -1
+        sock.settimeout(timeout)
+        start_time = time.time()
+        sock.connect(target_addr)
+        sock.close()
+        cost_time = int(round(time.time() - start_time, 3)*1000)
+        try:
+            geo_api_co = f"https://api.ipinfo.io/lite/{ip}?token=ac0234fdb1a7c7"
+            #geo_api_ci = f"https://api.ipgeolocation.io/v2/ipgeo?apiKey=2f98161b8f61480889286e1f9a91d937&ip={ip}&fields=location.city"
+            country = requests.get(geo_api_co, timeout=timeout).json()['country']
+            #city = requests.get(geo_api_ci, timeout=timeout).json()['location']['city']
+        except Exception as e:
+            country = '未知'
+            pass
+        return True, f"连接成功 耗时：{cost_time}", cost_time, f"{country}"
+    except socket.timeout:
+        return False, f"连接超时（{timeout}秒）", -1, '未知'
+    except ConnectionRefusedError:
+        return False, "端口拒绝连接（端口关闭）", -1, '未知'
+    except Exception as e:
+        return False, f"连接失败：{str(e)[:6]}...", -1, '未知'
+        
 def sort_out_cfips_json(test_us_num=0, test_other_num=0):
     unique_ip_list = []
     unique_ip_dict = {}
