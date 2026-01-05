@@ -177,7 +177,6 @@ if __name__ == "__main__":
                 list_ips.append(item['ip'])
     except Exception as e:
         print(f"❌ 读取失败: {str(e)}")
-        return
     api_token = os.getenv('DYNV6_TOKEN')
 
     if list_ips:
