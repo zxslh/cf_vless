@@ -169,9 +169,9 @@ def sort_out_cfips_json(test_us_num=0, test_other_num=0):
                 ip_info['cost_time'] = cost_time
                 if ip_info['name'] == '未知': ip_info['name'] = location
                 good_cost_time.append(ip_info)
-                print(f"      ✅ Index: {str(index).ljust(5)} | {ip_info['ip'].ljust(21)} | {test_msg} | {location.ljust(30)}")
+                print(f"✅ Index: {str(index).ljust(5)} | {ip_info['ip'].ljust(21)} | {test_msg} | {location.ljust(58)}")
             else:
-                print(f"      🗑️ Index: {str(index).ljust(5)} | {ip_info['ip'].ljust(21)} | {test_msg.ljust(38)}")
+                print(f"🗑️ Index: {str(index).ljust(5)} | {ip_info['ip'].ljust(21)} | {test_msg.ljust(58)}")
         print('')
     unknown = [item for item in good_cost_time if item['name'] == '未知']
     known = [item for item in good_cost_time if item['name'] != '未知']
@@ -185,9 +185,9 @@ def sort_out_cfips_json(test_us_num=0, test_other_num=0):
             ip_info['cost_time'] = cost_time
             if ip_info['name'] == '未知': ip_info['name'] = location
             if is_valid:
-                print(f"      ✅ Index: {str(index).ljust(5)} | {ip_info['ip'].ljust(21)} | {test_msg} | {location.ljust(30)}")
+                print(f"✅ Index: {str(index).ljust(5)} | {ip_info['ip'].ljust(21)} | {test_msg} | {location.ljust(58)}")
             else:
-                print(f"      ⚠️ Index: {str(index).ljust(5)} | {ip_info['ip'].ljust(21)} | {test_msg.ljust(38)}")
+                print(f"⚠️ Index: {str(index).ljust(5)} | {ip_info['ip'].ljust(21)} | {test_msg.ljust(58)}")
         print('')
     print(f"  🔄 更新完成！")
     unique_ip_list = us[test_us_num:] + other[test_other_num:] + test_ipv4s_data
