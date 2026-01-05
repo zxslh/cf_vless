@@ -102,7 +102,7 @@ if __name__ == "__main__":
     if unique_ips:
         update_dynv6_A(os.getenv('CF_VLESS_ADDR'))
 
-    if vless_urls:
-        with open('index.html', 'w', encoding='utf-8') as file:
-            file.write(vless_urls)
-            print(f'✅ 写入index成功！')
+   # if vless_urls:
+   #     with open('index.html', 'w', encoding='utf-8') as file:
+   #         file.write(vless_urls)
+   #         print(f'✅ 写入index成功！')
