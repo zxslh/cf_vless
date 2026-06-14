@@ -5,10 +5,6 @@ on:
     - cron: '30 03 * * 1' # 周一早三点半运行
   workflow_dispatch: # 允许手动触发
   
-concurrency:
-  group: update-ip-list
-  cancel-in-progress: true
-  
 jobs:
 
   update-ip-list:
@@ -50,12 +46,11 @@ jobs:
     - name: Commit and push changes
       run: |
         git config --local user.email "actions@github.com"
-        git config --local user.name "GitHub Action"
-        git pull --rebase origin main        
+        git config --local user.name "GitHub Action"        
         if [ -n "$(git status --porcelain)" ]; then
           git add abcd.json index.html
           git commit -m "Automatic update"
-          git push origin main
+          git push
         else
           echo "No changes detected, skipping commit."
         fi
