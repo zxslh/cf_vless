@@ -52,6 +52,8 @@ jobs:
         git config --local user.email "actions@github.com"
         git config --local user.name "GitHub Action"
         if [ -n "$(git status --porcelain)" ]; then
+          git pull --rebase origin main
+          git push origin main        
           git add abcd.json index.html
           git commit -m "Automatic update"
           git push
