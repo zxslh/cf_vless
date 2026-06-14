@@ -4,7 +4,11 @@ on:
   schedule:
     - cron: '30 03 * * 1' # 周一早三点半运行
   workflow_dispatch: # 允许手动触发
-
+  
+concurrency:
+  group: update-ip-list
+  cancel-in-progress: true
+  
 jobs:
 
   update-ip-list:
