@@ -8240,13 +8240,6 @@
       "cost_time": 5
     },
     {
-      "ip": "104.17.222.146",
-      "port": 443,
-      "group": "104.17.222",
-      "name": "United States",
-      "cost_time": 5
-    },
-    {
       "ip": "188.114.97.171",
       "port": 443,
       "group": "188.114.97",
@@ -10130,13 +10123,6 @@
       "cost_time": 6
     },
     {
-      "ip": "172.64.157.109",
-      "port": 443,
-      "group": "172.64.157",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
       "ip": "104.20.63.242",
       "port": 443,
       "group": "104.20.63",
@@ -10207,93 +10193,9 @@
       "cost_time": 6
     },
     {
-      "ip": "172.64.159.89",
-      "port": 443,
-      "group": "172.64.159",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "172.64.156.197",
-      "port": 443,
-      "group": "172.64.156",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "172.64.145.223",
-      "port": 443,
-      "group": "172.64.145",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "172.64.52.28",
-      "port": 443,
-      "group": "172.64.52",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "104.18.40.237",
-      "port": 443,
-      "group": "104.18.40",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "104.18.39.74",
-      "port": 443,
-      "group": "104.18.39",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "172.64.146.68",
-      "port": 443,
-      "group": "172.64.146",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "172.64.157.26",
-      "port": 443,
-      "group": "172.64.157",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "172.64.53.162",
-      "port": 443,
-      "group": "172.64.53",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "172.64.152.161",
-      "port": 443,
-      "group": "172.64.152",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
       "ip": "104.17.177.11",
       "port": 443,
       "group": "104.17.177",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "172.64.147.84",
-      "port": 443,
-      "group": "172.64.147",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "104.18.44.193",
-      "port": 443,
-      "group": "104.18.44",
       "name": "United States",
       "cost_time": 6
     },
@@ -10308,34 +10210,6 @@
       "ip": "172.67.68.27",
       "port": 443,
       "group": "172.67.68",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "104.18.40.152",
-      "port": 443,
-      "group": "104.18.40",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "172.64.147.67",
-      "port": 443,
-      "group": "172.64.147",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "172.64.155.159",
-      "port": 443,
-      "group": "172.64.155",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "104.17.60.252",
-      "port": 443,
-      "group": "104.17.60",
       "name": "United States",
       "cost_time": 6
     },
@@ -10361,20 +10235,6 @@
       "cost_time": 6
     },
     {
-      "ip": "172.64.144.224",
-      "port": 443,
-      "group": "172.64.144",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "172.64.156.156",
-      "port": 443,
-      "group": "172.64.156",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
       "ip": "104.19.153.1",
       "port": 443,
       "group": "104.19.153",
@@ -10385,13 +10245,6 @@
       "ip": "104.19.156.149",
       "port": 443,
       "group": "104.19.156",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "104.16.157.130",
-      "port": 443,
-      "group": "104.16.157",
       "name": "United States",
       "cost_time": 6
     },
@@ -10473,51 +10326,9 @@
       "cost_time": 6
     },
     {
-      "ip": "104.16.147.57",
-      "port": 443,
-      "group": "104.16.147",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "162.159.46.221",
-      "port": 443,
-      "group": "162.159.46",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "104.20.29.67",
-      "port": 443,
-      "group": "104.20.29",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
       "ip": "172.67.138.33",
       "port": 443,
       "group": "172.67.138",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "8.6.112.77",
-      "port": 443,
-      "group": "8.6.112",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "104.16.147.231",
-      "port": 443,
-      "group": "104.16.147",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "104.16.147.134",
-      "port": 443,
-      "group": "104.16.147",
       "name": "United States",
       "cost_time": 6
     },
@@ -10536,79 +10347,9 @@
       "cost_time": 6
     },
     {
-      "ip": "162.159.46.194",
-      "port": 443,
-      "group": "162.159.46",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "172.64.146.128",
-      "port": 443,
-      "group": "172.64.146",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "172.64.146.44",
-      "port": 443,
-      "group": "172.64.146",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
       "ip": "172.67.69.119",
       "port": 443,
       "group": "172.67.69",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "162.159.243.219",
-      "port": 443,
-      "group": "162.159.243",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "104.26.4.112",
-      "port": 443,
-      "group": "104.26.4",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "172.66.147.235",
-      "port": 443,
-      "group": "172.66.147",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "104.20.29.6",
-      "port": 443,
-      "group": "104.20.29",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "104.17.121.181",
-      "port": 443,
-      "group": "104.17.121",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "104.17.148.159",
-      "port": 443,
-      "group": "104.17.148",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "162.159.46.160",
-      "port": 443,
-      "group": "162.159.46",
       "name": "United States",
       "cost_time": 6
     },
@@ -10620,65 +10361,9 @@
       "cost_time": 6
     },
     {
-      "ip": "104.26.4.27",
-      "port": 443,
-      "group": "104.26.4",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "104.17.148.131",
-      "port": 443,
-      "group": "104.17.148",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "104.19.220.89",
-      "port": 443,
-      "group": "104.19.220",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "104.16.148.238",
-      "port": 443,
-      "group": "104.16.148",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "104.16.0.45",
-      "port": 443,
-      "group": "104.16.0",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "104.27.196.60",
-      "port": 443,
-      "group": "104.27.196",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "104.17.121.86",
-      "port": 443,
-      "group": "104.17.121",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
       "ip": "188.114.98.46",
       "port": 443,
       "group": "188.114.98",
-      "name": "United States",
-      "cost_time": 6
-    },
-    {
-      "ip": "104.16.0.82",
-      "port": 443,
-      "group": "104.16.0",
       "name": "United States",
       "cost_time": 6
     },
@@ -10697,23 +10382,9 @@
       "cost_time": 6
     },
     {
-      "ip": "190.93.245.69",
-      "port": 443,
-      "group": "190.93.245",
-      "name": "Costa Rica",
-      "cost_time": 6
-    },
-    {
       "ip": "190.93.247.146",
       "port": 443,
       "group": "190.93.247",
-      "name": "Costa Rica",
-      "cost_time": 6
-    },
-    {
-      "ip": "190.93.245.220",
-      "port": 443,
-      "group": "190.93.245",
       "name": "Costa Rica",
       "cost_time": 6
     },
@@ -10749,13 +10420,6 @@
       "ip": "104.18.91.237",
       "port": 443,
       "group": "104.18.91",
-      "name": "United States",
-      "cost_time": 7
-    },
-    {
-      "ip": "104.19.153.230",
-      "port": 443,
-      "group": "104.19.153",
       "name": "United States",
       "cost_time": 7
     },
@@ -11068,13 +10732,6 @@
       "cost_time": 7
     },
     {
-      "ip": "188.114.97.218",
-      "port": 443,
-      "group": "188.114.97",
-      "name": "United States",
-      "cost_time": 7
-    },
-    {
       "ip": "104.19.36.153",
       "port": 443,
       "group": "104.19.36",
@@ -11085,20 +10742,6 @@
       "ip": "172.67.138.129",
       "port": 443,
       "group": "172.67.138",
-      "name": "United States",
-      "cost_time": 7
-    },
-    {
-      "ip": "172.64.152.94",
-      "port": 443,
-      "group": "172.64.152",
-      "name": "United States",
-      "cost_time": 7
-    },
-    {
-      "ip": "104.17.144.232",
-      "port": 443,
-      "group": "104.17.144",
       "name": "United States",
       "cost_time": 7
     },
@@ -11317,20 +10960,6 @@
       "port": 443,
       "group": "162.159.195",
       "name": "United States",
-      "cost_time": 9
-    },
-    {
-      "ip": "162.159.243.25",
-      "port": 443,
-      "group": "162.159.243",
-      "name": "United States",
-      "cost_time": 9
-    },
-    {
-      "ip": "190.93.247.12",
-      "port": 443,
-      "group": "190.93.247",
-      "name": "Costa Rica",
       "cost_time": 9
     },
     {
@@ -11929,13 +11558,6 @@
       "cost_time": 14
     },
     {
-      "ip": "172.67.69.74",
-      "port": 443,
-      "group": "172.67.69",
-      "name": "United States",
-      "cost_time": 14
-    },
-    {
       "ip": "104.18.92.112",
       "port": 443,
       "group": "104.18.92",
@@ -12286,16 +11908,30 @@
       "cost_time": 17
     },
     {
-      "ip": "104.17.155.80",
+      "ip": "104.16.253.9",
       "port": 443,
-      "group": "104.17.155",
+      "group": "104.16.253",
       "name": "United States",
       "cost_time": 17
     },
     {
-      "ip": "172.66.147.151",
+      "ip": "104.17.29.99",
       "port": 443,
-      "group": "172.66.147",
+      "group": "104.17.29",
+      "name": "United States",
+      "cost_time": 17
+    },
+    {
+      "ip": "104.17.148.243",
+      "port": 443,
+      "group": "104.17.148",
+      "name": "United States",
+      "cost_time": 17
+    },
+    {
+      "ip": "104.16.148.97",
+      "port": 443,
+      "group": "104.16.148",
       "name": "United States",
       "cost_time": 17
     },
@@ -12671,17 +12307,507 @@
       "cost_time": 18
     },
     {
-      "ip": "172.67.138.174",
+      "ip": "104.18.40.100",
+      "port": 443,
+      "group": "104.18.40",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.18.37.247",
+      "port": 443,
+      "group": "104.18.37",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.19.146.107",
+      "port": 443,
+      "group": "104.19.146",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.17.115.139",
+      "port": 443,
+      "group": "104.17.115",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.17.100.56",
+      "port": 443,
+      "group": "104.17.100",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.17.27.61",
+      "port": 443,
+      "group": "104.17.27",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.17.121.66",
+      "port": 443,
+      "group": "104.17.121",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.17.24.88",
+      "port": 443,
+      "group": "104.17.24",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "172.64.145.62",
+      "port": 443,
+      "group": "172.64.145",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.18.39.49",
+      "port": 443,
+      "group": "104.18.39",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.18.35.3",
+      "port": 443,
+      "group": "104.18.35",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "172.64.157.95",
+      "port": 443,
+      "group": "172.64.157",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.16.240.37",
+      "port": 443,
+      "group": "104.16.240",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.17.115.185",
+      "port": 443,
+      "group": "104.17.115",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.17.107.7",
+      "port": 443,
+      "group": "104.17.107",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.17.120.107",
+      "port": 443,
+      "group": "104.17.120",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.19.154.125",
+      "port": 443,
+      "group": "104.19.154",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.17.50.237",
+      "port": 443,
+      "group": "104.17.50",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.16.154.153",
+      "port": 443,
+      "group": "104.16.154",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.18.42.191",
+      "port": 443,
+      "group": "104.18.42",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.17.31.58",
+      "port": 443,
+      "group": "104.17.31",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.17.177.233",
+      "port": 443,
+      "group": "104.17.177",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.18.33.225",
+      "port": 443,
+      "group": "104.18.33",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.18.40.152",
+      "port": 443,
+      "group": "104.18.40",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "172.64.152.94",
+      "port": 443,
+      "group": "172.64.152",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.18.40.189",
+      "port": 443,
+      "group": "104.18.40",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.16.158.108",
+      "port": 443,
+      "group": "104.16.158",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.17.146.69",
+      "port": 443,
+      "group": "104.17.146",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "172.67.218.32",
+      "port": 443,
+      "group": "172.67.218",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.17.31.33",
+      "port": 443,
+      "group": "104.17.31",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "172.64.158.29",
+      "port": 443,
+      "group": "172.64.158",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.18.40.77",
+      "port": 443,
+      "group": "104.18.40",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.16.155.81",
+      "port": 443,
+      "group": "104.16.155",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.17.177.137",
+      "port": 443,
+      "group": "104.17.177",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.16.245.145",
+      "port": 443,
+      "group": "104.16.245",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "172.66.0.96",
+      "port": 443,
+      "group": "172.66.0",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.17.140.80",
+      "port": 443,
+      "group": "104.17.140",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.19.92.210",
+      "port": 443,
+      "group": "104.19.92",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.17.79.241",
+      "port": 443,
+      "group": "104.17.79",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.16.13.47",
+      "port": 443,
+      "group": "104.16.13",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.26.13.142",
+      "port": 443,
+      "group": "104.26.13",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.20.17.132",
+      "port": 443,
+      "group": "104.20.17",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "172.66.169.2",
+      "port": 443,
+      "group": "172.66.169",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "162.159.159.240",
+      "port": 443,
+      "group": "162.159.159",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "162.159.193.56",
+      "port": 443,
+      "group": "162.159.193",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "172.64.146.5",
+      "port": 443,
+      "group": "172.64.146",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "188.114.98.228",
+      "port": 443,
+      "group": "188.114.98",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "162.159.46.68",
+      "port": 443,
+      "group": "162.159.46",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "141.101.115.251",
+      "port": 443,
+      "group": "141.101.115",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "141.101.115.87",
+      "port": 443,
+      "group": "141.101.115",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "188.114.99.204",
+      "port": 443,
+      "group": "188.114.99",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "162.159.193.194",
+      "port": 443,
+      "group": "162.159.193",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.16.92.9",
+      "port": 443,
+      "group": "104.16.92",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "172.67.138.189",
       "port": 443,
       "group": "172.67.138",
       "name": "United States",
       "cost_time": 18
     },
     {
-      "ip": "188.114.98.60",
+      "ip": "104.17.121.214",
       "port": 443,
-      "group": "188.114.98",
+      "group": "104.17.121",
       "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "8.6.112.12",
+      "port": 443,
+      "group": "8.6.112",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.16.140.73",
+      "port": 443,
+      "group": "104.16.140",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.19.220.135",
+      "port": 443,
+      "group": "104.19.220",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.17.121.236",
+      "port": 443,
+      "group": "104.17.121",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.26.4.229",
+      "port": 443,
+      "group": "104.26.4",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "188.114.97.140",
+      "port": 443,
+      "group": "188.114.97",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.18.79.173",
+      "port": 443,
+      "group": "104.18.79",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.16.92.194",
+      "port": 443,
+      "group": "104.16.92",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "188.114.97.28",
+      "port": 443,
+      "group": "188.114.97",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "172.67.138.124",
+      "port": 443,
+      "group": "172.67.138",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.19.220.133",
+      "port": 443,
+      "group": "104.19.220",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.20.29.179",
+      "port": 443,
+      "group": "104.20.29",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "104.20.29.18",
+      "port": 443,
+      "group": "104.20.29",
+      "name": "United States",
+      "cost_time": 18
+    },
+    {
+      "ip": "190.93.247.129",
+      "port": 443,
+      "group": "190.93.247",
+      "name": "Costa Rica",
+      "cost_time": 18
+    },
+    {
+      "ip": "190.93.245.94",
+      "port": 443,
+      "group": "190.93.245",
+      "name": "Costa Rica",
+      "cost_time": 18
+    },
+    {
+      "ip": "190.93.247.223",
+      "port": 443,
+      "group": "190.93.247",
+      "name": "Costa Rica",
+      "cost_time": 18
+    },
+    {
+      "ip": "190.93.245.7",
+      "port": 443,
+      "group": "190.93.245",
+      "name": "Costa Rica",
       "cost_time": 18
     },
     {
@@ -12730,6 +12856,76 @@
       "ip": "104.17.223.192",
       "port": 443,
       "group": "104.17.223",
+      "name": "United States",
+      "cost_time": 19
+    },
+    {
+      "ip": "104.17.25.169",
+      "port": 443,
+      "group": "104.17.25",
+      "name": "United States",
+      "cost_time": 19
+    },
+    {
+      "ip": "104.17.210.183",
+      "port": 443,
+      "group": "104.17.210",
+      "name": "United States",
+      "cost_time": 19
+    },
+    {
+      "ip": "172.64.159.79",
+      "port": 443,
+      "group": "172.64.159",
+      "name": "United States",
+      "cost_time": 19
+    },
+    {
+      "ip": "172.66.46.67",
+      "port": 443,
+      "group": "172.66.46",
+      "name": "United States",
+      "cost_time": 19
+    },
+    {
+      "ip": "104.21.198.38",
+      "port": 443,
+      "group": "104.21.198",
+      "name": "United States",
+      "cost_time": 19
+    },
+    {
+      "ip": "104.20.6.131",
+      "port": 443,
+      "group": "104.20.6",
+      "name": "United States",
+      "cost_time": 19
+    },
+    {
+      "ip": "162.159.243.65",
+      "port": 443,
+      "group": "162.159.243",
+      "name": "United States",
+      "cost_time": 19
+    },
+    {
+      "ip": "8.6.112.238",
+      "port": 443,
+      "group": "8.6.112",
+      "name": "United States",
+      "cost_time": 19
+    },
+    {
+      "ip": "104.16.0.92",
+      "port": 443,
+      "group": "104.16.0",
+      "name": "United States",
+      "cost_time": 19
+    },
+    {
+      "ip": "172.66.147.229",
+      "port": 443,
+      "group": "172.66.147",
       "name": "United States",
       "cost_time": 19
     },
@@ -12807,6 +13003,13 @@
       "ip": "104.19.48.157",
       "port": 443,
       "group": "104.19.48",
+      "name": "United States",
+      "cost_time": 20
+    },
+    {
+      "ip": "172.64.53.12",
+      "port": 443,
+      "group": "172.64.53",
       "name": "United States",
       "cost_time": 20
     },
@@ -12900,6 +13103,20 @@
       "group": "104.16.150",
       "name": "United States",
       "cost_time": 25
+    },
+    {
+      "ip": "172.66.136.236",
+      "port": 443,
+      "group": "172.66.136",
+      "name": "United States",
+      "cost_time": 28
+    },
+    {
+      "ip": "172.66.214.185",
+      "port": 443,
+      "group": "172.66.214",
+      "name": "United States",
+      "cost_time": 32
     },
     {
       "ip": "104.20.62.235",
@@ -12996,13 +13213,6 @@
       "ip": "172.67.232.230",
       "port": 443,
       "group": "172.67.232",
-      "name": "United States",
-      "cost_time": 34
-    },
-    {
-      "ip": "104.20.6.227",
-      "port": 443,
-      "group": "104.20.6",
       "name": "United States",
       "cost_time": 34
     },
